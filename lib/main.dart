@@ -10,11 +10,8 @@ import 'ThemeConfig.dart';
 import 'services/NavigationProvider.dart';
 import 'services/OnAirProgramProvider.dart';
 import 'services/PlayerProvider.dart';
-
 import 'package:flutter/material.dart';
-
 import 'screens/AppContainer.dart';
-
 import 'services/OnAirLatestSongProvider.dart';
 
 void main() {
