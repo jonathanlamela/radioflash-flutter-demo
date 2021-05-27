@@ -10,15 +10,16 @@ class WebRadioChooseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = PageController(
+        viewportFraction: 0.5,
         initialPage: Provider.of<PlayerProvider>(context, listen: false)
             .currentPlaylistIndex);
 
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 8),
+          padding: EdgeInsets.only(left: 24, right: 24, bottom: 8, top: 8),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 "SELEZIONA WEB RADIO",
@@ -37,17 +38,6 @@ class WebRadioChooseWidget extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_left,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        controller.previousPage(
-                            duration: Duration(milliseconds: 600),
-                            curve: Curves.easeInOut);
-                      },
-                    ),
                     Expanded(
                       child: PageView(
                         controller: controller,
@@ -60,52 +50,40 @@ class WebRadioChooseWidget extends StatelessWidget {
                         children: List.generate(
                           playlist.length,
                           (index) {
-                            return Container(
-                              padding: EdgeInsets.all(16),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Flexible(
-                                    flex: 3,
-                                    child: Container(
-                                      padding: EdgeInsets.all(16),
-                                      child: Image.asset("images/playlist/" +
-                                          playlist[index]["logoUrl"]!),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                      playlist[index]["etichettaCompleta"]!,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily:
-                                              GoogleFonts.anton().fontFamily),
-                                    ),
-                                  )
-                                ],
-                              ),
+                            return WebRadioItemWidget(
+                              playlistitem: playlist[index],
                             );
                           },
                         ),
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_right,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        controller.nextPage(
-                            duration: Duration(milliseconds: 600),
-                            curve: Curves.easeInOut);
-                      },
-                    ),
                   ],
                 ),
               ),
             ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class WebRadioItemWidget extends StatelessWidget {
+  final playlistitem;
+  const WebRadioItemWidget({Key? key, required this.playlistitem})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Flexible(
+          flex: 3,
+          child: Container(
+            padding: EdgeInsets.all(16),
+            child: Image.asset("images/playlist/" + playlistitem["logoUrl"]!),
           ),
         ),
       ],

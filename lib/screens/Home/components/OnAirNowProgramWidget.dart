@@ -108,7 +108,7 @@ class ProgrammazioneSlider extends StatelessWidget {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: Colors.black87,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.5),
@@ -124,13 +124,21 @@ class ProgrammazioneSlider extends StatelessWidget {
             children: [
               Flexible(
                 flex: 6,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: programma.copertina!.image,
-                      fit: BoxFit.fill,
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: programma.copertina!.image,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
-                  ),
+                    (index == indexActive
+                        ? OnAirAnimation(
+                            controller: _controller, background: background)
+                        : Container()),
+                  ],
                 ),
               ),
               Flexible(
@@ -143,10 +151,9 @@ class ProgrammazioneSlider extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
                                 child: Text(
@@ -163,70 +170,84 @@ class ProgrammazioneSlider extends StatelessWidget {
                                 child: Text(
                                   programma.speaker.toUpperCase(),
                                   style: TextStyle(
-                                    color: Colors.red,
-                                    fontSize: 12,
+                                    color: Colors.white,
+                                    fontSize: 14,
                                     fontFamily: GoogleFonts.anton().fontFamily,
                                   ),
                                 ),
                               ),
                               Container(
                                 child: Text(
-                                  "${DateFormat('H:mm').format(programma.orarioInizio!)}-${DateFormat('H:mm').format(programma.orarioFine!)}",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.white,
-                                    fontFamily: GoogleFonts.roboto().fontFamily,
-                                  ),
-                                ),
+                                    "${DateFormat('H:mm').format(programma.orarioInizio!)}-${DateFormat('H:mm').format(programma.orarioFine!)}",
+                                    style: GoogleFonts.sigmarOne(
+                                        color: Colors.white)),
                               ),
                             ],
                           ),
                         ),
                       ),
-                      (index == indexActive
-                          ? AnimatedBuilder(
-                              animation: _controller,
-                              builder: (context, child) {
-                                return Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      margin: EdgeInsets.only(right: 8),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.settings_input_antenna,
-                                            color: background.evaluate(
-                                              AlwaysStoppedAnimation(
-                                                _controller.value,
-                                              ),
-                                            ),
-                                            size: 28,
-                                          ),
-                                          Text(
-                                            "ON AIR",
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: background.evaluate(
-                                                AlwaysStoppedAnimation(
-                                                    _controller.value),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ));
-                              },
-                            )
-                          : Container())
                     ],
                   ),
                 ),
               ),
             ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class OnAirAnimation extends StatelessWidget {
+  const OnAirAnimation({
+    Key? key,
+    required AnimationController controller,
+    required this.background,
+  })  : _controller = controller,
+        super(key: key);
+
+  final AnimationController _controller;
+  final Animatable<Color?> background;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Align(
+          alignment: Alignment.topRight,
+          child: Container(
+            color: Colors.red,
+            width: 100,
+            margin: EdgeInsets.only(
+              right: 10,
+              top: 10,
+            ),
+            padding: EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.settings_input_antenna,
+                  color: background.evaluate(
+                    AlwaysStoppedAnimation(
+                      _controller.value,
+                    ),
+                  ),
+                  size: 24,
+                ),
+                Text(
+                  "ON AIR",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: background.evaluate(
+                      AlwaysStoppedAnimation(_controller.value),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

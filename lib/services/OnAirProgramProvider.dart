@@ -25,11 +25,11 @@ class OnAirProgramProvider extends ChangeNotifier {
 
   startSync() {
     Timer.periodic(Duration(seconds: 20), (timer) async {
-      await syncProgram();
+      await syncNow();
     });
   }
 
-  syncProgram() async {
+  syncNow() async {
     var response = await fetch();
     currentResponse = ProgrammazioneResponse.fromJson(response);
 

@@ -22,12 +22,12 @@ class OnAirLatestSongProvider extends ChangeNotifier {
   List<TrackItem> currentList = [];
 
   startSync() {
-    Timer.periodic(Duration(seconds: 5), (timer) async {
-      await syncMetadata();
+    Timer.periodic(Duration(seconds: 40), (timer) async {
+      await syncNow();
     });
   }
 
-  syncMetadata() async {
+  syncNow() async {
     var response = await fetchData(playlist[0]);
     List<TrackItem> responseMap =
         response.map<TrackItem>((e) => TrackItem.fromJson(e)).toList();

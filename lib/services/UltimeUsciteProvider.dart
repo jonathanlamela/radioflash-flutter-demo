@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:radioflash/RadioMeta.dart';
 import 'package:radioflash/models/NewSongRelease.dart';
 
 Future fetchData(dynamic link) async {
@@ -15,8 +16,8 @@ Future fetchData(dynamic link) async {
 class UltimeUsciteProvider extends ChangeNotifier {
   List<NewSongRelease> currentList = [];
 
-  syncNow(var link) async {
-    var response = await fetchData(link);
+  syncNow() async {
+    var response = await fetchData(ultimeUsciteLink);
 
     List<NewSongRelease> responseMap = response
         .map<NewSongRelease>((e) => NewSongRelease.fromJson(e))

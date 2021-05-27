@@ -42,12 +42,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<OnAirProgramProvider>(context, listen: false).startSync();
-    Provider.of<OnAirProgramProvider>(context, listen: false).syncProgram();
-
     Provider.of<OnAirLatestSongProvider>(context, listen: false).startSync();
     Provider.of<PlayerProvider>(context, listen: false).startSync();
-    Provider.of<UltimeUsciteProvider>(context, listen: false)
-        .syncNow(ultimeUsciteLink);
+
+    Provider.of<OnAirLatestSongProvider>(context, listen: false).syncNow();
+    Provider.of<OnAirProgramProvider>(context, listen: false).syncNow();
+    Provider.of<UltimeUsciteProvider>(context, listen: false).syncNow();
     Provider.of<HitsProvider>(context, listen: false).syncNow(hitsLink);
 
     AudioService.start(

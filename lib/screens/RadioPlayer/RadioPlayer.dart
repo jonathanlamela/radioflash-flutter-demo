@@ -32,14 +32,11 @@ class RadioPlayerMobile extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(left: 24, right: 24, top: 24),
               child: Column(
                 children: [
-                  AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: WebRadioChooseWidget(),
-                  ),
+                  Container(height: 200, child: WebRadioChooseWidget()),
                   Container(
+                    padding: EdgeInsets.only(left: 24, right: 24, top: 24),
                     height: 430,
                     child: UltimiSuonatiPlaylist(),
                   )
