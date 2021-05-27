@@ -24,7 +24,7 @@ class OnAirProgramProvider extends ChangeNotifier {
   ProgramItem? nowProgram;
 
   startSync() {
-    Timer.periodic(Duration(seconds: 20), (timer) async {
+    Timer.periodic(Duration(minutes: 10), (timer) async {
       await syncNow();
     });
   }
