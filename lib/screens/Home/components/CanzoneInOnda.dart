@@ -30,30 +30,27 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        Card(
-          color: Colors.grey[600],
-          child: Container(
-            height: 100,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Consumer<OnAirLatestSongProvider>(
-                    builder: (context, value, child) {
-                      return AnimatedSwitcher(
-                        child: value.currentList.isNotEmpty
-                            ? SongInfo(item: value.currentList.first)
-                            : LoadingProgress(),
-                        duration: Duration(milliseconds: 800),
-                      );
-                    },
-                  ),
-                )
-              ],
-            ),
+        Container(
+          height: 100,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Consumer<OnAirLatestSongProvider>(
+                  builder: (context, value, child) {
+                    return AnimatedSwitcher(
+                      child: value.currentList.isNotEmpty
+                          ? SongInfo(item: value.currentList.first)
+                          : LoadingProgress(),
+                      duration: Duration(milliseconds: 800),
+                    );
+                  },
+                ),
+              )
+            ],
           ),
-        )
+        ),
       ],
     );
   }
