@@ -15,7 +15,6 @@ double getSliderHeight(BuildContext context) {
 double getSliderViewportFraction(BuildContext context) {
   var mediaQuerySize = MediaQuery.of(context).size;
 
-  print(mediaQuerySize.width);
   if (mediaQuerySize.width > 600) {
     return 0.8;
   } else if (mediaQuerySize.width > 300) {
