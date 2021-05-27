@@ -4,6 +4,7 @@ import 'package:radioflash/screens/Home/components/HitsRadio.dart';
 
 import 'package:radioflash/screens/Home/components/OnAirNowProgramWidget.dart';
 import 'package:radioflash/screens/Home/components/UltimeUsciteTablet.dart';
+import 'package:radioflash/widgets/RadioSize.dart';
 
 import 'components/CanzoneInOnda.dart';
 import 'components/UltimeUscite.dart';
@@ -49,7 +50,10 @@ class HomeContentMobile extends StatelessWidget {
           children: [
             Column(
               children: [
-                OnAirNowProgramWidget(),
+                Container(
+                  height: getSliderHeight(context),
+                  child: OnAirNowProgramWidget(),
+                ),
                 Container(
                   padding:
                       EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 24),
@@ -94,7 +98,7 @@ class HomeContentTablet extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: getSliderHeight(context),
                   child: OnAirNowProgramWidget(),
                 ),
                 Container(

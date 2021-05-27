@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:radioflash/models/ProgramItem.dart';
 import 'package:radioflash/services/OnAirProgramProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
+import 'package:radioflash/widgets/RadioSize.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class OnAirNowProgramWidget extends StatefulWidget {
@@ -95,15 +96,18 @@ class ProgrammazioneSlider extends StatelessWidget {
       index++;
     });
 
-    var pageViewController =
-        PageController(initialPage: indexActive, viewportFraction: 0.8);
+    var pageViewController = PageController(
+        initialPage: indexActive,
+        viewportFraction: getSliderViewportFraction(context));
 
     return PageView.builder(
       controller: pageViewController,
       itemCount: items.length,
       itemBuilder: (context, index) {
         var programma = items.elementAt(index);
+
         return Container(
+          margin: EdgeInsets.symmetric(horizontal: 8),
           decoration: BoxDecoration(
             color: Colors.black,
             boxShadow: [
