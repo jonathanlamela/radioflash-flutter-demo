@@ -120,7 +120,7 @@ class ProgrammazioneSlider extends StatelessWidget {
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
                 flex: 6,
@@ -142,47 +142,44 @@ class ProgrammazioneSlider extends StatelessWidget {
                 ),
               ),
               Flexible(
-                flex: 2,
+                flex: 3,
                 child: Container(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  padding: EdgeInsets.only(left: 8),
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        flex: 2,
-                        child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Container(
-                                child: Text(
-                                  programma.titolo.toUpperCase(),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    fontFamily: GoogleFonts.roboto().fontFamily,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                child: Text(
-                                  programma.speaker.toUpperCase(),
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontFamily: GoogleFonts.anton().fontFamily,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                child: Text(
-                                    "${DateFormat('H:mm').format(programma.orarioInizio!)}-${DateFormat('H:mm').format(programma.orarioFine!)}",
-                                    style: GoogleFonts.sigmarOne(
-                                        color: Colors.white)),
-                              ),
-                            ],
+                      Container(
+                        child: Text(
+                          programma.titolo,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: GoogleFonts.quicksand().fontFamily,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          programma.speaker,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: GoogleFonts.quicksand().fontFamily,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(6),
+                        color: Colors.redAccent[700],
+                        child: Text(
+                          "${DateFormat('H:mm').format(programma.orarioInizio!)}-${DateFormat('H:mm').format(programma.orarioFine!)}",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: GoogleFonts.quicksand().fontFamily,
                           ),
                         ),
                       ),
@@ -217,7 +214,7 @@ class OnAirAnimation extends StatelessWidget {
         return Align(
           alignment: Alignment.topRight,
           child: Container(
-            color: Colors.red,
+            color: Colors.redAccent[700],
             width: 100,
             margin: EdgeInsets.only(
               right: 10,
