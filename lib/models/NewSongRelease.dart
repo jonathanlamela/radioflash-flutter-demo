@@ -8,7 +8,7 @@ class NewSongRelease {
 
   NewSongRelease();
 
-  factory NewSongRelease.fromJson(Map<String, dynamic?> json) {
+  factory NewSongRelease.fromJson(Map<String, dynamic> json) {
     var item = NewSongRelease();
 
     item.titolo = json["title"] ?? "";

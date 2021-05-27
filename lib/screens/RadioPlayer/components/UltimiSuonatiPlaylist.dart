@@ -6,8 +6,6 @@ import 'package:radioflash/services/PlayerProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 import 'package:radioflash/widgets/UltimiSuonatiList.dart';
 
-import '../../../widgets/PlaylistListItem.dart';
-
 class UltimiSuonatiPlaylist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

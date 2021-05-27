@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 import '../ThemeConfig.dart';
 

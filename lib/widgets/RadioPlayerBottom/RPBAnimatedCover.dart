@@ -1,12 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RPBAnimatedCover extends StatefulWidget {
-  Image? image;
-  bool? isPlaying = false;
-  RPBAnimatedCover({this.image, this.isPlaying});
+  final Image? image;
+  final bool? isPlaying;
+  RPBAnimatedCover({this.image, this.isPlaying = false});
   @override
   State<StatefulWidget> createState() {
     return RPBAnimatedCoverState();

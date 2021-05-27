@@ -7,7 +7,6 @@ import 'package:radioflash/models/ProgramItem.dart';
 import 'package:radioflash/services/OnAirProgramProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 import 'package:radioflash/widgets/RadioSize.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class OnAirNowProgramWidget extends StatefulWidget {
   @override

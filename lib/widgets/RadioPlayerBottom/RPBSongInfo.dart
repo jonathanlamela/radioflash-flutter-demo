@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../ThemeConfig.dart';
 import '../../services/PlayerProvider.dart';
-import '../../services/PlayerProvider.dart';
 import 'RPBAnimatedCover.dart';
 
 class RPBSongInfo extends StatelessWidget {

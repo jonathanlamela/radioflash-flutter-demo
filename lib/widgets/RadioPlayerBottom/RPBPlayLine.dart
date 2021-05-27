@@ -6,11 +6,10 @@ import '../../ThemeConfig.dart';
 import '../../services/PlayerProvider.dart';
 
 class RPBPlayLine extends StatelessWidget {
-  var isPlaying = false;
-
   @override
   Widget build(BuildContext context) {
-    isPlaying = Provider.of<PlayerProvider>(context, listen: true).isPlaying;
+    var isPlaying =
+        Provider.of<PlayerProvider>(context, listen: true).isPlaying;
     return LinearProgressIndicator(
       backgroundColor: Colors.white,
       valueColor: new AlwaysStoppedAnimation<Color?>(themePrimary),

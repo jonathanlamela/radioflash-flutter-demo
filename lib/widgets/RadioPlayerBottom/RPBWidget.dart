@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:radioflash/ThemeConfig.dart';
 
 import 'RPBSongInfo.dart';
 import 'RPBPlayLine.dart';

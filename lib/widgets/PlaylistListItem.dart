@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../models/TrackItem.dart';
 
 class PlaylistItem extends StatelessWidget {
-  TrackItem item;
+  final TrackItem item;
   PlaylistItem({required this.item});
   @override
   Widget build(BuildContext context) {
