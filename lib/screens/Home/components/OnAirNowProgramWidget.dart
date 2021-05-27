@@ -95,11 +95,11 @@ class ProgrammazioneSlider extends StatelessWidget {
       index++;
     });
 
-    return VxSwiper.builder(
-      isFastScrollingEnabled: true,
-      enlargeCenterPage: true,
-      aspectRatio: (MediaQuery.of(context).size.width > 700 ? 16 / 9 : 1.5),
-      initialPage: indexActive,
+    var pageViewController =
+        PageController(initialPage: indexActive, viewportFraction: 0.8);
+
+    return PageView.builder(
+      controller: pageViewController,
       itemCount: items.length,
       itemBuilder: (context, index) {
         var programma = items.elementAt(index);
