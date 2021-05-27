@@ -35,9 +35,10 @@ class Home extends StatelessWidget {
                     child: OnAirNowProgramWidget(),
                   ),
                   Container(
+                    margin: EdgeInsets.only(top: 24),
+                    color: Colors.black87,
                     padding: EdgeInsets.only(
                         left: 24, right: 24, top: 24, bottom: 24),
-                    color: Color.fromARGB(70, 255, 13, 13),
                     child: Column(
                       children: [
                         CanzoneInOnda(),

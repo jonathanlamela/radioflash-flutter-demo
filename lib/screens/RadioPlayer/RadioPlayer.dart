@@ -26,7 +26,6 @@ class RadioPlayerMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 5, right: 5),
       width: double.infinity,
       child: SingleChildScrollView(
         child: Column(
@@ -36,6 +35,8 @@ class RadioPlayerMobile extends StatelessWidget {
                 children: [
                   Container(height: 200, child: WebRadioChooseWidget()),
                   Container(
+                    margin: EdgeInsets.only(top: 24),
+                    color: Colors.black87,
                     padding: EdgeInsets.only(left: 24, right: 24, top: 24),
                     height: 430,
                     child: UltimiSuonatiPlaylist(),

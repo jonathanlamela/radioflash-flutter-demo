@@ -46,7 +46,7 @@ class AppContainerState extends State<AppContainer> {
     ];
 
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: themePrimary));
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
 
     return Container(
       decoration: BoxDecoration(
