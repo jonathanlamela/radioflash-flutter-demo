@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:radioflash/screens/Home/components/HitsRadio.dart';
 
 import 'package:radioflash/screens/Home/components/OnAirNowProgramWidget.dart';
+import 'package:radioflash/screens/Home/components/UltimaClassificaWidget.dart';
 import 'package:radioflash/widgets/RadioSize.dart';
 
 import 'components/CanzoneInOnda.dart';
@@ -43,6 +44,7 @@ class Home extends StatelessWidget {
                       children: [
                         CanzoneInOnda(),
                         UltimiSuonatiInOnda(),
+                        UltimaClassificaWidget(),
                         UltimeUscite(),
                         HitsRadio()
                       ],

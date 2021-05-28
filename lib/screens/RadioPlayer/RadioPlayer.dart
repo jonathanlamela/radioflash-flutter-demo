@@ -37,8 +37,8 @@ class RadioPlayerMobile extends StatelessWidget {
                   Container(
                     margin: EdgeInsets.only(top: 24),
                     color: Colors.black87,
-                    padding: EdgeInsets.only(left: 24, right: 24, top: 24),
-                    height: 430,
+                    padding: EdgeInsets.only(
+                        left: 24, right: 24, top: 24, bottom: 24),
                     child: UltimiSuonatiPlaylist(),
                   )
                 ],

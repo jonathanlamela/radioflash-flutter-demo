@@ -36,8 +36,8 @@ class AppContainerState extends State<AppContainer> {
         label: "Radio",
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.bar_chart),
-        label: "Classifica",
+        icon: Icon(Icons.article),
+        label: "Notizie",
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.settings_input_antenna),

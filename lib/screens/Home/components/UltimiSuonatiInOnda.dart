@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
+import 'package:radioflash/widgets/RadioSize.dart';
 import 'package:radioflash/widgets/UltimiSuonatiList.dart';
 
 import '../../../services/OnAirLatestSongProvider.dart';
@@ -28,27 +29,25 @@ class UltimiSuonatiInOnda extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          height: 380,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(
-                child: Consumer<OnAirLatestSongProvider>(
-                  builder: (context, value, child) {
-                    return AnimatedSwitcher(
-                      duration: Duration(milliseconds: 600),
-                      child: value.currentList.isNotEmpty
-                          ? UltimiSuonatiList(
-                              items: value.currentList
-                                  .where((element) => element.isSong == true)
-                                  .toList()
-                                  .skip(1)
-                                  .take(6))
-                          : LoadingProgress(),
-                    );
-                  },
-                ),
+              Consumer<OnAirLatestSongProvider>(
+                builder: (context, value, child) {
+                  return AnimatedSwitcher(
+                    duration: Duration(milliseconds: 600),
+                    child: value.currentList.isNotEmpty
+                        ? UltimiSuonatiList(
+                            key: UniqueKey(),
+                            items: value.currentList
+                                .where((element) => element.isSong == true)
+                                .toList()
+                                .skip(1)
+                                .take(6))
+                        : LoadingProgress(),
+                  );
+                },
               ),
             ],
           ),
