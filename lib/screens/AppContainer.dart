@@ -54,8 +54,8 @@ class AppContainerState extends State<AppContainer> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.black,
-            Colors.grey,
+            Colors.red,
+            Colors.grey[900]!,
           ],
         ),
       ),

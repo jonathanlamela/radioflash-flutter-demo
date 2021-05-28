@@ -17,13 +17,6 @@ class Home extends StatelessWidget {
     return AnimatedSwitcher(
       duration: Duration(milliseconds: 300),
       child: Container(
-        decoration: BoxDecoration(
-          //color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15),
-            topRight: Radius.circular(15),
-          ),
-        ),
         width: double.infinity,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
@@ -37,9 +30,22 @@ class Home extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 24),
-                    color: Colors.black87,
+                    decoration: BoxDecoration(
+                      color: Colors.black87,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30)),
+                    ),
                     padding: EdgeInsets.only(
-                        left: 24, right: 24, top: 24, bottom: 24),
+                        left: 24, right: 24, top: 10, bottom: 24),
                     child: Column(
                       children: [
                         CanzoneInOnda(),
