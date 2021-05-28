@@ -6,6 +6,7 @@ import 'package:radioflash/screens/Home/components/OnAirNowProgramWidget.dart';
 import 'package:radioflash/screens/Home/components/UltimaClassificaWidget.dart';
 import 'package:radioflash/widgets/RadioSize.dart';
 
+import '../../ThemeConfig.dart';
 import 'components/CanzoneInOnda.dart';
 import 'components/UltimeUscite.dart';
 import 'components/UltimiSuonatiInOnda.dart';
@@ -30,20 +31,7 @@ class Home extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 24),
-                    decoration: BoxDecoration(
-                      color: Colors.black87,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30)),
-                    ),
+                    decoration: context.homeContainerStyle(),
                     padding: EdgeInsets.only(
                         left: 24, right: 24, top: 10, bottom: 24),
                     child: Column(

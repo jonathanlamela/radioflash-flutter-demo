@@ -46,7 +46,7 @@ class AppContainerState extends State<AppContainer> {
     ];
 
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+        SystemUiOverlayStyle(statusBarColor: context.statusBarColor()));
 
     return Container(
       decoration: BoxDecoration(
@@ -54,15 +54,15 @@ class AppContainerState extends State<AppContainer> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.red,
-            Colors.grey[900]!,
+            context.gradientStartColor(),
+            context.gradiendEndColor(),
           ],
         ),
       ),
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
         child: Scaffold(
-          backgroundColor: Color.fromARGB(100, 41, 31, 31),
+          backgroundColor: context.scaffoldBackgroundColor(),
           body: Stack(
             children: [
               Column(
@@ -97,7 +97,7 @@ class AppContainerState extends State<AppContainer> {
             child: AppBar(
                 brightness: Brightness.dark,
                 elevation: 0,
-                backgroundColor: Colors.transparent),
+                backgroundColor: context.statusBarColor()),
             preferredSize: Size.fromHeight(0),
           ),
           bottomNavigationBar: Consumer<NavigationProvider>(
@@ -112,9 +112,10 @@ class AppContainerState extends State<AppContainer> {
                 },
                 currentIndex: value.currentPage,
                 type: BottomNavigationBarType.fixed,
-                selectedItemColor: Colors.red[900],
-                unselectedItemColor: Colors.black,
-                unselectedLabelStyle: TextStyle(color: Colors.black),
+                selectedItemColor: context.bottomNavSelectedItemColor(),
+                unselectedItemColor: context.bottomNavUnselectedItemColor(),
+                unselectedLabelStyle: context.bottomNavTextStyle(),
+                selectedLabelStyle: context.bottomNavSelectedTextStyle(),
                 items: List.generate(navItems.length, (index) {
                   return BottomNavigationBarItem(
                     icon: navItems[index].icon,

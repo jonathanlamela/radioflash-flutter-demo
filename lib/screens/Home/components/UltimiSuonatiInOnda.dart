@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 import 'package:radioflash/widgets/UltimiSuonatiList.dart';
 
+import "../../../ThemeConfig.dart";
 import '../../../services/OnAirLatestSongProvider.dart';
 
 class UltimiSuonatiInOnda extends StatelessWidget {
@@ -17,12 +17,7 @@ class UltimiSuonatiInOnda extends StatelessWidget {
           child: Row(
             children: [
               Text("ULTIMI SUONATI",
-                  textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                  style: GoogleFonts.quicksand(
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ))
+                  style: context.ultimiSuonatiInOndaTextStyle())
             ],
           ),
         ),

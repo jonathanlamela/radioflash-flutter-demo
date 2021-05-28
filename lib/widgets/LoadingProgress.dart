@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../ThemeConfig.dart';
 
 class LoadingProgress extends StatelessWidget {
   const LoadingProgress({
@@ -13,8 +14,9 @@ class LoadingProgress extends StatelessWidget {
       children: [
         Center(
           child: CircularProgressIndicator(
-            backgroundColor: Colors.transparent,
-            valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+            backgroundColor: context.loadingProgressBackgroundColor(),
+            valueColor: new AlwaysStoppedAnimation<Color>(
+                context.loadingProgressColor()),
           ),
         ),
       ],

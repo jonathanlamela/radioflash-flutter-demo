@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:radioflash/models/TrackItem.dart';
 
+import "../ThemeConfig.dart";
+
 class UltimiSuonatiList extends StatelessWidget {
   const UltimiSuonatiList({
     Key? key,
@@ -55,11 +57,7 @@ class UltimiSuonatiList extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(5)),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 5,
-                                    color: Colors.black.withOpacity(0.5))
-                              ],
+                              boxShadow: [context.shadownForDark()],
                             ),
                           ),
                         ),
@@ -72,26 +70,20 @@ class UltimiSuonatiList extends StatelessWidget {
                               children: [
                                 Text(
                                   item.title,
-                                  style: GoogleFonts.quicksand(
-                                      color: Colors.white),
+                                  style: context.ultimiSuonatiTitleTextStyle(),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
                                   item.artist,
                                   overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.quicksand(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 16),
+                                  style: context.ultimiSuonatiArtistTextStyle(),
                                 ),
                                 Text(
                                   "${item.quantiMinutiFa!} minuti fa"
                                       .toString(),
                                   overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.quicksand(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 10),
+                                  style:
+                                      context.ultimiSuonatiMinutiFaTextStyle(),
                                 ),
                               ],
                             ),

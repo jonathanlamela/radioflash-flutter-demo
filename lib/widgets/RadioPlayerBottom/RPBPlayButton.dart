@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/PlayerProvider.dart';
+import '../../../ThemeConfig.dart';
 
 class RPBPlayButton extends StatefulWidget {
   @override
@@ -11,12 +12,10 @@ class RPBPlayButton extends StatefulWidget {
   }
 }
 
-class RPBPlayButtonState extends State<RPBPlayButton>
-    with WidgetsBindingObserver {
+class RPBPlayButtonState extends State<RPBPlayButton> {
   var isPlaying = false;
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addObserver(this);
     isPlaying = Provider.of<PlayerProvider>(context, listen: true).isPlaying;
     var content = Container(
       child: Column(
@@ -24,7 +23,7 @@ class RPBPlayButtonState extends State<RPBPlayButton>
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CircleAvatar(
-            backgroundColor: Colors.grey.shade900,
+            backgroundColor: context.playPauseButtonColor(),
             child: IconButton(
                 icon: (isPlaying != true
                     ? Icon(
@@ -33,7 +32,7 @@ class RPBPlayButtonState extends State<RPBPlayButton>
                     : Icon(
                         Icons.pause,
                       )),
-                color: Colors.white,
+                color: context.playPauseButtonIconColor(),
                 onPressed: () {
                   if (isPlaying) {
                     Provider.of<PlayerProvider>(context, listen: false).stop();

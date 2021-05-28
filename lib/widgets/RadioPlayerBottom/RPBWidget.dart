@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'RPBSongInfo.dart';
 import 'RPBPlayLine.dart';
 import 'RPBPlayButton.dart';
+import '../../ThemeConfig.dart';
 
 class RPBWidget extends StatefulWidget {
   RPBWidget({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class RPBWidgetState extends State<RPBWidget> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Colors.black,
+            color: context.playerBackgroundColor(),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -35,7 +36,7 @@ class RPBWidgetState extends State<RPBWidget> {
           ),
           height: 60,
           child: Material(
-            color: Colors.black87,
+            color: context.playerBackgroundColor(),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,

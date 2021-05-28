@@ -41,11 +41,7 @@ class UltimeUsciteMobile extends StatelessWidget {
             children: [
               Text(
                 "NOVITA' RADIOFLASH",
-                style: TextStyle(
-                    fontFamily: GoogleFonts.quicksand().fontFamily,
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                style: context.novitaTextStyle(),
               )
             ],
           ),
@@ -57,7 +53,7 @@ class UltimeUsciteMobile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Card(
-                color: Colors.white60,
+                color: context.novitaCardColor(),
                 borderOnForeground: true,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
@@ -191,7 +187,7 @@ class NewReleaseDialog extends StatelessWidget {
                 Flexible(
                   flex: 1,
                   child: Container(
-                    color: themePrimary,
+                    color: context.ultimeUsciteContainerColor(),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -201,19 +197,15 @@ class NewReleaseDialog extends StatelessWidget {
                           children: [
                             Text(
                               item.titolo,
-                              style: TextStyle(color: Colors.white),
+                              style: context.ultimeUsciteTitleTextStyle(),
                             ),
                             Text(
                               item.artista,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: GoogleFonts.anton().fontFamily,
-                              ),
+                              style: context.ultimeUsciteArtistTextStyle(),
                             ),
                             Text(
                               DateFormat('d/MM/y').format(item.radioDate!),
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 12),
+                              style: context.ultimeUsciteRadioDateTextStyle(),
                             )
                           ],
                         )
@@ -243,12 +235,7 @@ class UltimeUsciteTablet extends StatelessWidget {
             children: [
               Text(
                 "NOVITA' RADIOFLASH",
-                textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                style: GoogleFonts.quicksand(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: context.novitaTextStyle(),
               )
             ],
           ),
@@ -258,12 +245,13 @@ class UltimeUsciteTablet extends StatelessWidget {
             child: Consumer<UltimeUsciteProvider>(
               builder: (context, value, child) {
                 return AnimatedSwitcher(
-                    duration: Duration(milliseconds: 600),
-                    child: value.currentList.isNotEmpty
-                        ? NewReleasesListTablet(
-                            items: value.currentList.toList().take(6),
-                          )
-                        : LoadingProgress());
+                  duration: Duration(milliseconds: 600),
+                  child: value.currentList.isNotEmpty
+                      ? NewReleasesListTablet(
+                          items: value.currentList.toList().take(6),
+                        )
+                      : LoadingProgress(),
+                );
               },
             ),
           ),
@@ -326,11 +314,7 @@ class NewReleasesListTablet extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(5)),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 5,
-                                    color: Colors.black.withOpacity(0.5))
-                              ],
+                              boxShadow: [context.shadownForDark()],
                             ),
                           ),
                         ),
@@ -343,35 +327,33 @@ class NewReleasesListTablet extends StatelessWidget {
                               children: [
                                 Text(
                                   item.titolo,
-                                  style: GoogleFonts.quicksand(
-                                      color: Colors.white),
+                                  style: context
+                                      .ultimeUsciteTabletTitleTextStyle(),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
                                   item.artista,
                                   overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.quicksand(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 16),
+                                  style: context
+                                      .ultimeUsciteTabletArtistTextStyle(),
                                 ),
                                 if (item.radioDate == DateTime.now())
                                   Chip(
-                                    backgroundColor: Colors.red[700],
+                                    backgroundColor:
+                                        context.ultimeUsciteOggiChipColor(),
                                     label: Text(
                                       "OGGI",
-                                      style: TextStyle(color: Colors.white),
+                                      style:
+                                          context.ultimeUsciteChipTextStyle(),
                                     ),
                                   ),
                                 if (item.radioDate != DateTime.now())
                                   Text(
-                                    DateFormat('d/MM/y')
-                                        .format(item.radioDate!),
-                                    overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.quicksand(
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                                      DateFormat('d/MM/y')
+                                          .format(item.radioDate!),
+                                      overflow: TextOverflow.ellipsis,
+                                      style: context
+                                          .ultimeUsciteTabletRadioDateTextStyle()),
                               ],
                             ),
                           ),

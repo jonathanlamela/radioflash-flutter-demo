@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:radioflash/ThemeConfig.dart';
 import 'package:radioflash/models/ProgramItem.dart';
 import 'package:radioflash/services/OnAirProgramProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
@@ -107,17 +108,7 @@ class ProgrammazioneSlider extends StatelessWidget {
 
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 8),
-          decoration: BoxDecoration(
-            color: Colors.black87,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
+          decoration: context.onAirContainerStyle(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,38 +141,19 @@ class ProgrammazioneSlider extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        child: Text(
-                          programma.titolo,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: GoogleFonts.quicksand().fontFamily,
-                          ),
-                        ),
+                        child: Text(programma.titolo,
+                            style: context.programTitleStyle()),
                       ),
                       Container(
-                        child: Text(
-                          programma.speaker,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: GoogleFonts.quicksand().fontFamily,
-                          ),
-                        ),
+                        child: Text(programma.speaker,
+                            style: context.programSpeakerStyle()),
                       ),
                       Container(
                         padding: EdgeInsets.all(6),
                         color: Colors.redAccent[700],
                         child: Text(
-                          "${DateFormat('H:mm').format(programma.orarioInizio!)}-${DateFormat('H:mm').format(programma.orarioFine!)}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: GoogleFonts.quicksand().fontFamily,
-                          ),
-                        ),
+                            "${DateFormat('H:mm').format(programma.orarioInizio!)}-${DateFormat('H:mm').format(programma.orarioFine!)}",
+                            style: context.programOrariStyle()),
                       ),
                     ],
                   ),

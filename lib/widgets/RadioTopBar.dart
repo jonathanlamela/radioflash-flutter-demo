@@ -17,7 +17,7 @@ class RadioTopBar extends StatelessWidget {
           Flexible(
             flex: 1,
             child: Container(
-              child: logoImmagine,
+              child: context.logoImmagine(),
             ),
           ),
           Flexible(

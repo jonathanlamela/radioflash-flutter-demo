@@ -5,6 +5,7 @@ import './components/WebRadioChoose.dart';
 
 import 'components/WebRadioChoose.dart';
 import 'components/UltimiSuonatiPlaylist.dart';
+import "../../ThemeConfig.dart";
 
 class RadioPlayer extends StatelessWidget {
   RadioPlayer({Key? key}) : super(key: key);
@@ -36,7 +37,7 @@ class RadioPlayerMobile extends StatelessWidget {
                   Container(height: 200, child: WebRadioChooseWidget()),
                   Container(
                     margin: EdgeInsets.only(top: 24),
-                    color: Colors.black87,
+                    color: context.radioContainerColor(),
                     padding: EdgeInsets.only(
                         left: 24, right: 24, top: 24, bottom: 24),
                     child: UltimiSuonatiPlaylist(),

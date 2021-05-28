@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:radioflash/ThemeConfig.dart';
 import 'package:radioflash/models/TrackItem.dart';
 import 'package:radioflash/services/HitsProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
@@ -16,15 +16,7 @@ class HitsRadio extends StatelessWidget {
         Container(
           padding: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
           child: Row(
-            children: [
-              Text("HITS",
-                  textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                  style: GoogleFonts.quicksand(
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ))
-            ],
+            children: [Text("HITS", style: context.hitsTextStyle())],
           ),
         ),
         Container(

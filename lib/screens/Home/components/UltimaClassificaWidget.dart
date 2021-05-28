@@ -10,6 +10,7 @@ import 'package:radioflash/widgets/LoadingProgress.dart';
 import 'package:radioflash/widgets/RadioSize.dart';
 
 import '../../../RadioMeta.dart';
+import '../../../ThemeConfig.dart';
 
 Future<Classifica> downloadLatestChart() async {
   var httpClient = http.Client();
@@ -34,11 +35,7 @@ class UltimaClassificaWidget extends StatelessWidget {
             children: [
               Text("ULTIMA CLASSIFICA",
                   textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                  style: GoogleFonts.quicksand(
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ))
+                  style: context.classificaTextStyle())
             ],
           ),
         ),
@@ -83,7 +80,7 @@ class ClassificaRender extends StatelessWidget {
           ),
           child: Text(
             classifica.titolo!,
-            style: TextStyle(color: Colors.white),
+            style: context.classificaTitoloTextStyle(),
           ),
         ),
         CustomScrollView(
@@ -136,8 +133,7 @@ class ClassificaRender extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("${index + 1}",
-                                    style: GoogleFonts.quicksand(
-                                        fontSize: 16, color: Colors.white)),
+                                    style: context.classificaNumeroTextStyle()),
                                 symbol,
                               ],
                             ),
@@ -146,26 +142,17 @@ class ClassificaRender extends StatelessWidget {
                         AspectRatio(
                           aspectRatio: 1 / 1,
                           child: Container(
-                            margin: EdgeInsets.all(4),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
+                              margin: EdgeInsets.all(4),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                                child: FittedBox(
+                                  child: item.cover,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
-                              child: FittedBox(
-                                child: item.cover,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 5,
-                                    color: Colors.black.withOpacity(0.5))
-                              ],
-                            ),
-                          ),
+                              decoration: context.classificaCoverDecoration()),
                         ),
                         Flexible(
                           flex: 6,
@@ -181,8 +168,8 @@ class ClassificaRender extends StatelessWidget {
                                     children: [
                                       Text(
                                         item.titolo!,
-                                        style: GoogleFonts.quicksand(
-                                            color: Colors.white),
+                                        style: context
+                                            .classificaSongTitleTextStyle(),
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       Row(
@@ -193,10 +180,8 @@ class ClassificaRender extends StatelessWidget {
                                             item.autori.elementAt(index).name! +
                                                 " ",
                                             overflow: TextOverflow.ellipsis,
-                                            style: GoogleFonts.quicksand(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                                fontSize: 16),
+                                            style: context
+                                                .classificaSongAuthorsTextStyle(),
                                           );
                                         },
                                       ))
@@ -213,14 +198,13 @@ class ClassificaRender extends StatelessWidget {
                 }, childCount: classifica.items.take(5).length)),
           ],
         ),
-        ElevatedButton.icon(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blueGrey)),
+        OutlinedButton.icon(
             onPressed: () {},
-            icon: Icon(Icons.playlist_add_check, color: Colors.white),
+            icon: Icon(Icons.playlist_add_check,
+                color: context.classificaMoreButtonIconColor()),
             label: Text(
               "Classifica completa",
-              style: TextStyle(color: Colors.white),
+              style: context.classificaMoreButtonTextStyle(),
             ))
       ],
     );

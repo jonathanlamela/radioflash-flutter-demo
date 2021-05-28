@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/services/PlayerProvider.dart';
 
 import '../../../RadioMeta.dart';
+import '../../../ThemeConfig.dart';
 
 class WebRadioChooseWidget extends StatelessWidget {
   @override
@@ -23,11 +23,7 @@ class WebRadioChooseWidget extends StatelessWidget {
             children: [
               Text(
                 "SELEZIONA WEB RADIO",
-                style: TextStyle(
-                    fontFamily: GoogleFonts.quicksand().fontFamily,
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                style: context.selezionaWebRadioTextStyle(),
               ),
             ],
           ),

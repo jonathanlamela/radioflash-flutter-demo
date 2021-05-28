@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'RadioFlash',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primaryColor: themePrimary),
+      theme: ThemeData(primaryColor: context.themePrimary()),
       home: AudioServiceWidget(
         child: AppContainer(),
       ),

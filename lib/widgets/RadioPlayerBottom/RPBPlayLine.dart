@@ -11,8 +11,9 @@ class RPBPlayLine extends StatelessWidget {
     var isPlaying =
         Provider.of<PlayerProvider>(context, listen: true).isPlaying;
     return LinearProgressIndicator(
-      backgroundColor: Colors.white,
-      valueColor: new AlwaysStoppedAnimation<Color?>(themePrimary),
+      backgroundColor: context.playlineBackgroundColor(),
+      valueColor:
+          new AlwaysStoppedAnimation<Color?>(context.playlineValueColor()),
       value: (isPlaying == true ? null : 0),
       semanticsLabel: 'Linear progress indicator',
     );

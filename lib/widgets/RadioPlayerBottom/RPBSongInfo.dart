@@ -43,13 +43,13 @@ class RPBSongInfo extends StatelessWidget {
                       Flexible(
                         child: Text(
                           value.currentList.first.title,
-                          style: tBottomPlayerSongTitle,
+                          style: context.playerSongTitleTextStyle(),
                         ),
                       ),
                       Flexible(
                         child: Text(
                           value.currentList.first.artist,
-                          style: tBottomPlayerSongArtist,
+                          style: context.playerSongArtistTextStyle(),
                         ),
                       )
                     ],

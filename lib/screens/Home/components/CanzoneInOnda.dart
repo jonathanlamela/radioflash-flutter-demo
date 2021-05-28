@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:radioflash/ThemeConfig.dart';
 import 'package:radioflash/models/TrackItem.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 
@@ -23,11 +23,7 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
           padding: EdgeInsets.only(top: 8, bottom: 8),
           child: Text(
             "ORA IN ONDA",
-            style: TextStyle(
-                fontFamily: GoogleFonts.quicksand().fontFamily,
-                fontSize: 16,
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
+            style: context.oraInOndaTextStyle(),
           ),
         ),
         Container(
@@ -75,25 +71,17 @@ class SongInfo extends StatelessWidget {
           aspectRatio: 1 / 1,
           child: ClipRRect(
             child: Container(
-              margin: EdgeInsets.all(4),
-              child: ClipRRect(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(5),
+                margin: EdgeInsets.all(4),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5),
+                  ),
+                  child: FittedBox(
+                    child: item.cover,
+                    fit: BoxFit.fill,
+                  ),
                 ),
-                child: FittedBox(
-                  child: item.cover,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(5),
-                ),
-                boxShadow: [
-                  BoxShadow(blurRadius: 5, color: Colors.white),
-                ],
-              ),
-            ),
+                decoration: context.canzoneInOndaDecoration()),
           ),
         ),
         Expanded(
@@ -108,21 +96,13 @@ class SongInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  item.title,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: GoogleFonts.quicksand().fontFamily),
-                ),
+                Text(item.title,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.oraInOndaSongTitle()),
                 Text(
                   item.artist,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontFamily: GoogleFonts.quicksand().fontFamily,
-                      fontWeight: FontWeight.bold),
+                  style: context.oraInOndaSongArtist(),
                 )
               ],
             ),

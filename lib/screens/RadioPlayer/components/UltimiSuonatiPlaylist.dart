@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/services/PlayerProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 import 'package:radioflash/widgets/UltimiSuonatiList.dart';
+import '../../../ThemeConfig.dart';
 
 class UltimiSuonatiPlaylist extends StatelessWidget {
   @override
@@ -15,13 +15,11 @@ class UltimiSuonatiPlaylist extends StatelessWidget {
           padding: EdgeInsets.only(top: 8, bottom: 8),
           child: Row(
             children: [
-              Text("ULTIMI SUONATI",
-                  textScaleFactor: MediaQuery.of(context).textScaleFactor,
-                  style: GoogleFonts.quicksand(
-                    fontSize: 16,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ))
+              Text(
+                "ULTIMI SUONATI",
+                textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                style: context.ultimiSuonatiPlaylistTextStyle(),
+              )
             ],
           ),
         ),
