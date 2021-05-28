@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
-import 'package:radioflash/widgets/RadioSize.dart';
 import 'package:radioflash/widgets/UltimiSuonatiList.dart';
 
 import '../../../services/OnAirLatestSongProvider.dart';
@@ -14,7 +13,7 @@ class UltimiSuonatiInOnda extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
+          padding: EdgeInsets.only(top: 8, bottom: 8),
           child: Row(
             children: [
               Text("ULTIMI SUONATI",

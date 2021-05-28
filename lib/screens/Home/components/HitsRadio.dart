@@ -75,7 +75,7 @@ class HitsList extends StatelessWidget {
             SliverGrid(
               gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 600,
-                mainAxisExtent: 63,
+                mainAxisExtent: 60,
                 mainAxisSpacing: 0,
                 crossAxisSpacing: 0,
                 childAspectRatio: 1,

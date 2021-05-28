@@ -16,7 +16,7 @@ class PlaylistItem extends StatelessWidget {
           AspectRatio(
             aspectRatio: 1 / 1,
             child: Container(
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(4),
               child: ClipRRect(
                 borderRadius: BorderRadius.all(
                   Radius.circular(5),

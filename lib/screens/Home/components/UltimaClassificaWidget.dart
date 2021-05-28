@@ -29,7 +29,7 @@ class UltimaClassificaWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
+          padding: EdgeInsets.only(top: 8, bottom: 0),
           child: Row(
             children: [
               Text("ULTIMA CLASSIFICA",
@@ -78,8 +78,6 @@ class ClassificaRender extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.only(
-            left: 8,
-            right: 8,
             top: 8,
             bottom: 8,
           ),
@@ -96,7 +94,7 @@ class ClassificaRender extends StatelessWidget {
                 gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: 1200,
                   mainAxisExtent: 60,
-                  mainAxisSpacing: 5,
+                  mainAxisSpacing: 0,
                   crossAxisSpacing: 0,
                   childAspectRatio: 1,
                 ),
@@ -125,28 +123,30 @@ class ClassificaRender extends StatelessWidget {
                       break;
                   }
                   return Container(
-                    height: 63,
+                    height: 60,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          padding: EdgeInsets.all(8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text("${index + 1}",
-                                  style: GoogleFonts.quicksand(
-                                      fontSize: 16, color: Colors.white)),
-                              symbol,
-                            ],
+                        Flexible(
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("${index + 1}",
+                                    style: GoogleFonts.quicksand(
+                                        fontSize: 16, color: Colors.white)),
+                                symbol,
+                              ],
+                            ),
                           ),
                         ),
                         AspectRatio(
                           aspectRatio: 1 / 1,
                           child: Container(
-                            margin: EdgeInsets.all(10),
+                            margin: EdgeInsets.all(4),
                             child: ClipRRect(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(5),

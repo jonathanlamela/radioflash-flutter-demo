@@ -20,7 +20,7 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
+          padding: EdgeInsets.only(top: 8, bottom: 8),
           child: Text(
             "ORA IN ONDA",
             style: TextStyle(
@@ -75,7 +75,7 @@ class SongInfo extends StatelessWidget {
           aspectRatio: 1 / 1,
           child: ClipRRect(
             child: Container(
-              margin: EdgeInsets.all(10),
+              margin: EdgeInsets.all(4),
               child: ClipRRect(
                 borderRadius: BorderRadius.all(
                   Radius.circular(5),
