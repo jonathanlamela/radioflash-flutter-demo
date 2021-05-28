@@ -225,7 +225,10 @@ extension ThemeContext on BuildContext {
   TextStyle playlistItemTitleTextStyle() =>
       TextStyle(color: Colors.white, fontFamily: mainFontFamily());
   TextStyle playlistItemArtistTextStyle() => TextStyle(
-      color: Colors.white, fontFamily: mainFontFamily(), fontSize: 16);
+      color: Colors.white,
+      fontFamily: mainFontFamily(),
+      fontSize: 16,
+      fontWeight: FontWeight.bold);
 
   BoxShadow shadownForDark() =>
       BoxShadow(blurRadius: 5, color: Colors.white.withOpacity(0.5));
