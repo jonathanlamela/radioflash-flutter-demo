@@ -78,7 +78,7 @@ extension ThemeContext on BuildContext {
   BoxDecoration classificaCoverDecoration() => BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5)),
         boxShadow: [
-          BoxShadow(blurRadius: 5, color: Colors.black.withOpacity(0.5))
+          BoxShadow(blurRadius: 5, color: Colors.white.withOpacity(0.5))
         ],
       );
 

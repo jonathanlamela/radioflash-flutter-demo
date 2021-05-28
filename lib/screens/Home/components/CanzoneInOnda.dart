@@ -20,7 +20,14 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          width: double.infinity,
           padding: EdgeInsets.only(top: 8, bottom: 8),
+          margin: EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: Colors.white, width: 0.2),
+            ),
+          ),
           child: Text(
             "ORA IN ONDA",
             style: context.oraInOndaTextStyle(),

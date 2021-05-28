@@ -14,6 +14,10 @@ class UltimiSuonatiInOnda extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.only(top: 8, bottom: 8),
+          margin: EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+              border:
+                  Border(bottom: BorderSide(color: Colors.white, width: 0.2))),
           child: Row(
             children: [
               Text("ULTIMI SUONATI",
