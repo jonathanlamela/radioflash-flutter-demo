@@ -79,7 +79,6 @@ class ClassificaRender extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.only(
-            top: 8,
             bottom: 8,
           ),
           child: Text(
