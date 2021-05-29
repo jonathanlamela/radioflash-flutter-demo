@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 extension ThemeContext on BuildContext {
   logoImmagine() => Image.asset("images/logo.png", height: 60);
   String mainFontFamily() => GoogleFonts.quicksand().fontFamily!;
-  Color themePrimary() => Colors.grey[900]!;
+  Color themePrimary() => Colors.red[900]!;
 
   Color loadingProgressBackgroundColor() => Colors.transparent;
   Color loadingProgressColor() => Colors.white;
@@ -194,9 +194,9 @@ extension ThemeContext on BuildContext {
       );
 
   //APPCONTAINER
-  Color statusBarColor() => Colors.transparent;
-  Color gradientStartColor() => Colors.red;
-  Color gradiendEndColor() => themePrimary();
+  Color statusBarColor() => themePrimary();
+  Color gradientStartColor() => Colors.grey;
+  Color gradiendEndColor() => Colors.black;
   Color scaffoldBackgroundColor() => Color.fromARGB(100, 41, 31, 31);
   Color bottomNavSelectedItemColor() => Colors.red[900]!;
   Color bottomNavUnselectedItemColor() => Colors.black;
