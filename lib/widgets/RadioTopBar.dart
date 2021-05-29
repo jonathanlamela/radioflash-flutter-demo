@@ -8,6 +8,7 @@ class RadioTopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: context.statusBarColor(),
       padding: EdgeInsets.only(bottom: 24, top: 10),
       child: Row(
         mainAxisSize: MainAxisSize.max,
