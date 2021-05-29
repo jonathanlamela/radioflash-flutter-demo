@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../services/PlayerProvider.dart';
-import '../../../ThemeConfig.dart';
+import '../../ThemeConfig.dart';
 
 class RPBPlayButton extends StatefulWidget {
   @override
