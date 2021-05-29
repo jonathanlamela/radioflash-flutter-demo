@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/ThemeConfig.dart';
@@ -172,7 +171,7 @@ class OnAirAnimation extends StatelessWidget {
     Key? key,
     required AnimationController controller,
     required this.background,
-  })  : _controller = controller,
+  })   : _controller = controller,
         super(key: key);
 
   final AnimationController _controller;
