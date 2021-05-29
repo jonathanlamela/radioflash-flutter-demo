@@ -1,12 +1,28 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:radioflash/RadioMeta.dart';
 import 'package:radioflash/ThemeConfig.dart';
 import 'package:radioflash/models/TrackItem.dart';
-import 'package:radioflash/services/HitsProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 
 import '../../../widgets/PlaylistListItem.dart';
+import 'package:http/http.dart' as http;
+
+Future<List<TrackItem>> fetchData(dynamic link) async {
+  var httpClient = http.Client();
+  var response = await httpClient.get(Uri.parse(link));
+  return compute(parseResult, response.body);
+}
+
+List<TrackItem> parseResult(response) {
+  return jsonDecode(response)["result"]
+      .cast<Map<String, dynamic>>()
+      .map<TrackItem>((e) => TrackItem.fromJson(e))
+      .toList();
+}
 
 class HitsRadio extends StatelessWidget {
   @override
@@ -26,19 +42,18 @@ class HitsRadio extends StatelessWidget {
         Container(
           width: double.infinity,
           child: Container(
-            child: Consumer<HitsProvider>(
-              builder: (context, value, child) {
-                return AnimatedSwitcher(
-                  duration: Duration(milliseconds: 600),
-                  child: value.currentList.isNotEmpty
-                      ? HitsList(
-                          items: value.currentList
-                              .where((element) => element.isSong == true)
-                              .toList()
-                              .skip(1)
-                              .take(6))
-                      : LoadingProgress(),
-                );
+            child: FutureBuilder(
+              future: fetchData(ultimeUsciteLink),
+              builder: (context, snapshot) {
+                return snapshot.hasData
+                    ? HitsList(
+                        items: (snapshot.data as Iterable<TrackItem>)
+                            .where((element) => element.isSong == true)
+                            .toList()
+                            .skip(1)
+                            .take(6),
+                      )
+                    : LoadingProgress();
               },
             ),
           ),
