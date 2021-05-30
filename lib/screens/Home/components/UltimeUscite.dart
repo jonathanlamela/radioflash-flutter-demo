@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:radioflash/RadioMeta.dart';
 import 'package:radioflash/models/NewSongRelease.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
@@ -23,7 +22,7 @@ Future<List<NewSongRelease>> fetchData(dynamic link) async {
   return compute(parseData, responseContent);
 }
 
-Future<List<NewSongRelease>> parseData(responseBody) {
+List<NewSongRelease> parseData(responseBody) {
   return responseBody
       .map<NewSongRelease>((e) => NewSongRelease.fromJson(e))
       .toList();
@@ -81,20 +80,21 @@ class UltimeUsciteMobile extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
                   child: Container(
-                      child: FutureBuilder(
-                    future: fetchData(ultimeUsciteLink),
-                    builder: (context, snapshot) {
-                      return AnimatedSwitcher(
-                        duration: Duration(milliseconds: 600),
-                        child: snapshot.hasData
-                            ? NewReleasesList(
-                                items: (snapshot.data as List<NewSongRelease>)
-                                    .where((element) => element.cover != null)
-                                    .toList())
-                            : LoadingProgress(),
-                      );
-                    },
-                  )),
+                    child: FutureBuilder(
+                      future: fetchData(ultimeUsciteLink),
+                      builder: (context, snapshot) {
+                        return AnimatedSwitcher(
+                          duration: Duration(milliseconds: 600),
+                          child: snapshot.hasData
+                              ? NewReleasesList(
+                                  items: (snapshot.data as List<NewSongRelease>)
+                                      .where((element) => element.cover != null)
+                                      .toList())
+                              : LoadingProgress(),
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -268,13 +268,18 @@ class UltimeUsciteTablet extends StatelessWidget {
           ),
         ),
         Container(
-          child: Container(child: FutureBuilder(
+          child: Container(
+              child: FutureBuilder(
+            future: fetchData(ultimeUsciteLink),
             builder: (context, snapshot) {
               return AnimatedSwitcher(
                 duration: Duration(milliseconds: 600),
                 child: snapshot.hasData
                     ? NewReleasesListTablet(
-                        items: (snapshot.data as List<NewSongRelease>).take(6),
+                        items: (snapshot.data as List<NewSongRelease>)
+                            .where((element) => element.cover != null)
+                            .take(6)
+                            .toList(),
                       )
                     : LoadingProgress(),
               );
