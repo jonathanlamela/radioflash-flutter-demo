@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
-import 'package:radioflash/services/UltimeUsciteProvider.dart';
 import 'RadioMeta.dart';
 import 'ThemeConfig.dart';
 import 'services/NavigationProvider.dart';
@@ -26,8 +25,6 @@ void main() {
             create: (context) => NavigationProvider()),
         ChangeNotifierProvider<OnAirLatestSongProvider>(
             create: (context) => OnAirLatestSongProvider()),
-        ChangeNotifierProvider<UltimeUsciteProvider>(
-            create: (context) => UltimeUsciteProvider()),
       ],
       child: MyApp(),
     ),
@@ -44,7 +41,6 @@ class MyApp extends StatelessWidget {
 
     Provider.of<OnAirLatestSongProvider>(context, listen: false).syncNow();
     Provider.of<OnAirProgramProvider>(context, listen: false).syncNow();
-    Provider.of<UltimeUsciteProvider>(context, listen: false).syncNow();
 
     AudioService.start(
         backgroundTaskEntrypoint: backgroundTaskEntrypoint,

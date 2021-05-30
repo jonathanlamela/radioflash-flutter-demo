@@ -43,7 +43,7 @@ class HitsRadio extends StatelessWidget {
           width: double.infinity,
           child: Container(
             child: FutureBuilder(
-              future: fetchData(ultimeUsciteLink),
+              future: fetchData(hitsLink),
               builder: (context, snapshot) {
                 return snapshot.hasData
                     ? HitsList(
