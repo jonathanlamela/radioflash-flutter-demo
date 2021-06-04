@@ -8,7 +8,8 @@ import 'dart:core';
 class ClassificaItem {
   String? movement;
   String? posizionePrecedente;
-  String? presenze;
+  String? settimane;
+  String? posmax;
   Image? cover;
   String? album;
   List<AutoreItem> autori = [];
@@ -21,7 +22,9 @@ class ClassificaItem {
 
     item.movement = json["movement"] ?? '=';
     item.posizionePrecedente = json["posizionePrecedente"] ?? "";
-    item.presenze = json["presenze"] ?? '';
+    item.settimane = json["settimane"] ?? '';
+    item.posmax = json["posmax"] ?? '';
+
     item.cover = Image.network(json["cover"] ?? defaultCoverUrl);
     item.album = json["album"] ?? '';
     item.autori = (json["autori"] as List)
