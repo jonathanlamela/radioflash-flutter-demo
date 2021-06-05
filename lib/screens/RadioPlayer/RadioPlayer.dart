@@ -36,10 +36,10 @@ class RadioPlayerMobile extends StatelessWidget {
                 children: [
                   Container(height: 200, child: WebRadioChooseWidget()),
                   Container(
-                    margin: EdgeInsets.only(top: 24),
-                    color: context.radioContainerColor(),
+                    margin: EdgeInsets.only(top: 24, left: 10, right: 10),
+                    decoration: context.homeContainerStyle(),
                     padding: EdgeInsets.only(
-                        left: 24, right: 24, top: 24, bottom: 24),
+                        left: 24, right: 24, top: 8, bottom: 24),
                     child: UltimiSuonatiPlaylist(),
                   )
                 ],
