@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
                     child: OnAirNowProgramWidget(),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 24),
+                    margin: EdgeInsets.only(top: 24, left: 10, right: 10),
                     decoration: context.homeContainerStyle(),
                     padding: EdgeInsets.only(
                         left: 24, right: 24, top: 10, bottom: 24),

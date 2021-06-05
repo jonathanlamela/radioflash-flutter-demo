@@ -113,6 +113,9 @@ extension ThemeContext on BuildContext {
   Color onAirProgramContainerColor() => Colors.black87;
   BoxDecoration onAirContainerStyle() => BoxDecoration(
         color: onAirProgramContainerColor(),
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.5),
@@ -194,8 +197,8 @@ extension ThemeContext on BuildContext {
       );
 
   //APPCONTAINER
-  Color statusBarColor() => themePrimary();
-  Color gradientStartColor() => Colors.grey;
+  Color statusBarColor() => Colors.transparent;
+  Color gradientStartColor() => Colors.red[900]!;
   Color gradiendEndColor() => Colors.black;
   Color scaffoldBackgroundColor() => Color.fromARGB(100, 41, 31, 31);
   Color bottomNavSelectedItemColor() => Colors.red[900]!;

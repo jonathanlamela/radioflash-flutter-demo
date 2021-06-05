@@ -21,13 +21,7 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
       children: [
         Container(
           width: double.infinity,
-          padding: EdgeInsets.only(top: 8, bottom: 8),
-          margin: EdgeInsets.only(bottom: 8),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: Colors.white, width: 0.2),
-            ),
-          ),
+          padding: EdgeInsets.only(top: 8, bottom: 8, left: 8),
           child: Text(
             "ORA IN ONDA",
             style: context.oraInOndaTextStyle(),
@@ -35,6 +29,11 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
         ),
         Container(
           height: 100,
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
