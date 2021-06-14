@@ -22,8 +22,12 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
         Container(
           width: double.infinity,
           padding: EdgeInsets.only(top: 8, bottom: 8, left: 8),
+          margin: EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+              border:
+                  Border(bottom: BorderSide(color: Colors.white, width: 0.2))),
           child: Text(
-            "ORA IN ONDA",
+            "Ora in onda",
             style: context.oraInOndaTextStyle(),
           ),
         ),

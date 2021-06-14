@@ -20,7 +20,7 @@ class UltimiSuonatiPlaylist extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                "ULTIMI SUONATI",
+                "Ultimi suonati",
                 textScaleFactor: MediaQuery.of(context).textScaleFactor,
                 style: context.ultimiSuonatiPlaylistTextStyle(),
               )

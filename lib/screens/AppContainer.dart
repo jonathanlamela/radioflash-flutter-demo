@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/ThemeConfig.dart';
+import 'package:radioflash/screens/Notizie/Notizie.dart';
 import 'package:radioflash/services/NavigationProvider.dart';
 import 'package:radioflash/widgets/RadioPlayerBottom/RPBWidget.dart';
 
@@ -83,6 +84,9 @@ class AppContainerState extends State<AppContainer> {
                           key: UniqueKey(),
                         ),
                         RadioPlayer(
+                          key: UniqueKey(),
+                        ),
+                        Notizie(
                           key: UniqueKey(),
                         ),
                       ],

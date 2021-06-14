@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:audio_service/audio_service.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import 'RadioMeta.dart';
@@ -13,22 +15,22 @@ import 'screens/AppContainer.dart';
 import 'services/OnAirLatestSongProvider.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider<PlayerProvider>(
-          create: (context) => PlayerProvider(),
+  initializeDateFormatting('it_IT', null).then((_) => runApp(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider<PlayerProvider>(
+              create: (context) => PlayerProvider(),
+            ),
+            ChangeNotifierProvider<OnAirProgramProvider>(
+                create: (context) => OnAirProgramProvider()),
+            ChangeNotifierProvider<NavigationProvider>(
+                create: (context) => NavigationProvider()),
+            ChangeNotifierProvider<OnAirLatestSongProvider>(
+                create: (context) => OnAirLatestSongProvider()),
+          ],
+          child: MyApp(),
         ),
-        ChangeNotifierProvider<OnAirProgramProvider>(
-            create: (context) => OnAirProgramProvider()),
-        ChangeNotifierProvider<NavigationProvider>(
-            create: (context) => NavigationProvider()),
-        ChangeNotifierProvider<OnAirLatestSongProvider>(
-            create: (context) => OnAirLatestSongProvider()),
-      ],
-      child: MyApp(),
-    ),
-  );
+      ));
 }
 
 class MyApp extends StatelessWidget {
@@ -49,7 +51,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'RadioFlash',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primaryColor: context.themePrimary()),
+      theme: ThemeData(
+          primaryColor: context.themePrimary(),
+          fontFamily: context.mainFontFamily()),
       home: AudioServiceWidget(
         child: AppContainer(),
       ),

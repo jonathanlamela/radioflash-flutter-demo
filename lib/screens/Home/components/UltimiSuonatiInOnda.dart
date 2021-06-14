@@ -20,7 +20,7 @@ class UltimiSuonatiInOnda extends StatelessWidget {
                   Border(bottom: BorderSide(color: Colors.white, width: 0.2))),
           child: Row(
             children: [
-              Text("ULTIMI SUONATI",
+              Text("Ultimi suonati",
                   style: context.ultimiSuonatiInOndaTextStyle())
             ],
           ),

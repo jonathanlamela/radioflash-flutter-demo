@@ -25,7 +25,12 @@ class ClassificaItem {
     item.settimane = json["settimane"] ?? '';
     item.posmax = json["posmax"] ?? '';
 
-    item.cover = Image.network(json["cover"] ?? defaultCoverUrl);
+    if (json["cover"] != null) {
+      json["cover"] = dominio + json["cover"];
+    }
+
+    item.cover = Image.network((json["cover"]) ?? defaultCoverUrl);
+
     item.album = json["album"] ?? '';
     item.autori = (json["autori"] as List)
         .cast<Map<String, dynamic>>()

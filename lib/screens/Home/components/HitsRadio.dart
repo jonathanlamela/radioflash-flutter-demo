@@ -36,7 +36,7 @@ class HitsRadio extends StatelessWidget {
               border:
                   Border(bottom: BorderSide(color: Colors.white, width: 0.2))),
           child: Row(
-            children: [Text("HITS", style: context.hitsTextStyle())],
+            children: [Text("Hits", style: context.hitsTextStyle())],
           ),
         ),
         Container(
