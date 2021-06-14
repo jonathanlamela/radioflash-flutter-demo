@@ -126,19 +126,16 @@ class ClassificaRender extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Flexible(
-                          flex: 2,
-                          child: Container(
-                            padding: EdgeInsets.all(8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("${index + 1}",
-                                    style: context.classificaNumeroTextStyle()),
-                                symbol,
-                              ],
-                            ),
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("${index + 1}",
+                                  style: context.classificaNumeroTextStyle()),
+                              symbol,
+                            ],
                           ),
                         ),
                         AspectRatio(
