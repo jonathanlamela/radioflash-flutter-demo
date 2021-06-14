@@ -58,7 +58,7 @@ class UltimeUsciteMobile extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                "NOVITA' RADIOFLASH",
+                "Novità RadioFlash",
                 style: context.novitaTextStyle(),
               )
             ],
@@ -262,7 +262,7 @@ class UltimeUsciteTablet extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                "NOVITA' RADIOFLASH",
+                "Novità RadioFlash",
                 style: context.novitaTextStyle(),
               )
             ],

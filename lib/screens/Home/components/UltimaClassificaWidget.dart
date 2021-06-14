@@ -35,7 +35,7 @@ class UltimaClassificaWidget extends StatelessWidget {
                   Border(bottom: BorderSide(color: Colors.white, width: 0.2))),
           child: Row(
             children: [
-              Text("ULTIMA CLASSIFICA",
+              Text("Ultima classifica",
                   textScaleFactor: MediaQuery.of(context).textScaleFactor,
                   style: context.classificaTextStyle())
             ],
@@ -127,6 +127,7 @@ class ClassificaRender extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Flexible(
+                          flex: 2,
                           child: Container(
                             padding: EdgeInsets.all(8),
                             child: Row(
@@ -174,18 +175,22 @@ class ClassificaRender extends StatelessWidget {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       Row(
-                                          children: List.generate(
-                                        item.autori.length,
-                                        (index) {
-                                          return Text(
-                                            item.autori.elementAt(index).name! +
-                                                " ",
-                                            overflow: TextOverflow.ellipsis,
-                                            style: context
-                                                .classificaSongAuthorsTextStyle(),
-                                          );
-                                        },
-                                      ))
+                                        children: List.generate(
+                                          item.autori.length,
+                                          (index) {
+                                            return Flexible(
+                                                child: Text(
+                                              item.autori
+                                                      .elementAt(index)
+                                                      .name! +
+                                                  " ",
+                                              overflow: TextOverflow.ellipsis,
+                                              style: context
+                                                  .classificaSongAuthorsTextStyle(),
+                                            ));
+                                          },
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
