@@ -39,13 +39,12 @@ class RadioPlayerMobile extends StatelessWidget {
                 children: [
                   Container(height: 200, child: WebRadioChooseWidget()),
                   Container(
-                    padding: EdgeInsets.only(
-                        left: 24, right: 24, top: 24, bottom: 24),
+                    padding: EdgeInsets.all(16),
                     margin: EdgeInsets.only(left: 10, right: 10, bottom: 8),
                     decoration: BoxDecoration(
                       color: context.homeContainerColor(),
                       borderRadius: BorderRadius.all(
-                        Radius.circular(30),
+                        Radius.circular(15),
                       ),
                       boxShadow: [
                         BoxShadow(
@@ -60,6 +59,11 @@ class RadioPlayerMobile extends StatelessWidget {
                       children: [
                         Container(
                           margin: EdgeInsets.only(bottom: 8),
+                          padding: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color: Colors.white, width: 0.2))),
                           child: Row(
                             children: [
                               Text(
@@ -203,7 +207,7 @@ class RadioPlayerMobile extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: context.homeContainerColor(),
                       borderRadius: BorderRadius.all(
-                        Radius.circular(30),
+                        Radius.circular(15),
                       ),
                       boxShadow: [
                         BoxShadow(
@@ -214,8 +218,7 @@ class RadioPlayerMobile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    padding: EdgeInsets.only(
-                        left: 24, right: 24, top: 24, bottom: 24),
+                    padding: EdgeInsets.all(16),
                     child: UltimiSuonatiPlaylist(),
                   ),
                 ],

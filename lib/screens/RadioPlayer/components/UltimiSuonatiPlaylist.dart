@@ -13,6 +13,10 @@ class UltimiSuonatiPlaylist extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.only(bottom: 8),
+          padding: EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+              border:
+                  Border(bottom: BorderSide(color: Colors.white, width: 0.2))),
           child: Row(
             children: [
               Text(

@@ -225,7 +225,7 @@ extension ThemeContext on BuildContext {
   BoxDecoration cardHomeDecoration() => BoxDecoration(
         color: homeContainerColor(),
         borderRadius: BorderRadius.all(
-          Radius.circular(30),
+          Radius.circular(15),
         ),
         boxShadow: [
           BoxShadow(
