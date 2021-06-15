@@ -113,14 +113,6 @@ extension ThemeContext on BuildContext {
         borderRadius: BorderRadius.all(
           Radius.circular(15),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
       );
 
   TextStyle programTitleStyle() => TextStyle(
@@ -228,5 +220,20 @@ extension ThemeContext on BuildContext {
         fontSize: 16,
         color: Colors.white,
         fontWeight: FontWeight.bold,
+      );
+
+  BoxDecoration cardHomeDecoration() => BoxDecoration(
+        color: homeContainerColor(),
+        borderRadius: BorderRadius.all(
+          Radius.circular(30),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
       );
 }

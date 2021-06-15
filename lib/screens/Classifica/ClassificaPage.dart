@@ -123,8 +123,12 @@ class ClassificaPageState extends State<ClassificaPage> {
                     child: Container(
                       padding: EdgeInsets.only(top: 20),
                       child: SingleChildScrollView(
-                        child: ClassificaRender(
-                          classifica: currentChart,
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 400),
+                          child: ClassificaRender(
+                            key: UniqueKey(),
+                            classifica: currentChart,
+                          ),
                         ),
                       ),
                     ),

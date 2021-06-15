@@ -55,10 +55,6 @@ class UltimeUsciteMobile extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.only(top: 8, bottom: 8),
-          margin: EdgeInsets.only(bottom: 8),
-          decoration: BoxDecoration(
-              border:
-                  Border(bottom: BorderSide(color: Colors.white, width: 0.2))),
           child: Row(
             children: [
               Text(
@@ -70,9 +66,7 @@ class UltimeUsciteMobile extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: Colors.black,
             borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
           child: Column(
@@ -131,7 +125,7 @@ class NewReleasesList extends StatelessWidget {
           slivers: [
             SliverGrid(
               gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 100,
+                maxCrossAxisExtent: 150,
                 mainAxisSpacing: 0,
                 crossAxisSpacing: 0,
                 childAspectRatio: 1,
@@ -259,10 +253,6 @@ class UltimeUsciteTablet extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.all(8),
-          margin: EdgeInsets.only(bottom: 8),
-          decoration: BoxDecoration(
-              border:
-                  Border(bottom: BorderSide(color: Colors.white, width: 0.2))),
           child: Row(
             children: [
               Text(
