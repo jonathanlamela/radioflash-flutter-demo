@@ -42,7 +42,20 @@ class Notizie extends StatelessWidget {
           Expanded(
             child: Container(
               margin: EdgeInsets.only(top: 24, left: 10, right: 10),
-              decoration: context.homeContainerStyle(),
+              decoration: BoxDecoration(
+                color: context.homeContainerColor(),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+              ),
               padding: EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 24),
               child: Column(
                 children: [

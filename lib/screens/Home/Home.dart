@@ -34,15 +34,19 @@ class Home extends StatelessWidget {
                     child: Column(
                       children: [
                         CardHome(
+                          padding: EdgeInsets.all(16),
                           child: CanzoneInOnda(),
                         ),
                         CardHome(
+                          padding: EdgeInsets.all(16),
                           child: UltimiSuonatiInOnda(),
                         ),
                         CardHome(
+                          padding: EdgeInsets.all(16),
                           child: UltimeUscite(),
                         ),
                         CardHome(
+                          padding: EdgeInsets.all(16),
                           child: HitsRadio(),
                         )
                       ],
