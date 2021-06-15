@@ -38,7 +38,6 @@ class Home extends StatelessWidget {
                       children: [
                         CanzoneInOnda(),
                         UltimiSuonatiInOnda(),
-                        UltimaClassificaWidget(),
                         UltimeUscite(),
                         HitsRadio()
                       ],

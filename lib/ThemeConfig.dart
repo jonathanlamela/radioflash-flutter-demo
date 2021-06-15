@@ -222,4 +222,11 @@ extension ThemeContext on BuildContext {
 
   BoxShadow shadownForDark() =>
       BoxShadow(blurRadius: 5, color: Colors.white.withOpacity(0.5));
+
+  //classifica page
+  TextStyle classificaPageTextStyle() => TextStyle(
+        fontSize: 16,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      );
 }

@@ -7,6 +7,9 @@ import 'components/WebRadioChoose.dart';
 import 'components/UltimiSuonatiPlaylist.dart';
 import "../../ThemeConfig.dart";
 
+var frequenzeSicilia = ["90.6", "93.5", "97.3", "99.7", "104.9"];
+var frequenzeCampania = ["93.7", "93.8", "95.4", "106.9"];
+
 class RadioPlayer extends StatelessWidget {
   RadioPlayer({Key? key}) : super(key: key);
   @override
@@ -36,12 +39,171 @@ class RadioPlayerMobile extends StatelessWidget {
                 children: [
                   Container(height: 200, child: WebRadioChooseWidget()),
                   Container(
-                    margin: EdgeInsets.only(top: 24, left: 10, right: 10),
-                    decoration: context.homeContainerStyle(),
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                    decoration: BoxDecoration(
+                      color: context.homeContainerColor(),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    padding: EdgeInsets.only(left: 24, right: 24, top: 8),
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
+                          margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color: Colors.white, width: 0.2))),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Frequenze",
+                                textScaleFactor:
+                                    MediaQuery.of(context).textScaleFactor,
+                                style: context.ultimiSuonatiPlaylistTextStyle(),
+                              )
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "SICILIA (FM)",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: List.generate(
+                                            frequenzeSicilia.length, (index) {
+                                          return Container(
+                                            padding: EdgeInsets.only(right: 8),
+                                            child: Text(
+                                              frequenzeSicilia.elementAt(index),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16),
+                                            ),
+                                          );
+                                        }),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "CAMPANIA (FM)",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: List.generate(
+                                            frequenzeCampania.length, (index) {
+                                          return Container(
+                                            padding: EdgeInsets.only(right: 8),
+                                            child: Text(
+                                              frequenzeCampania
+                                                  .elementAt(index),
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16),
+                                            ),
+                                          );
+                                        }),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "MALTA,GOZO E SUD SICILIA (DAB+)",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.only(right: 8),
+                                            child: Text(
+                                              "6C",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16),
+                                            ),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 8),
+                    decoration: BoxDecoration(
+                      color: context.homeContainerColor(),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
                     padding: EdgeInsets.only(
-                        left: 24, right: 24, top: 8, bottom: 24),
+                        left: 24, right: 24, top: 24, bottom: 24),
                     child: UltimiSuonatiPlaylist(),
-                  )
+                  ),
                 ],
               ),
             )
