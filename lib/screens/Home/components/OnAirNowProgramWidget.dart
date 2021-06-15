@@ -116,11 +116,17 @@ class ProgrammazioneSlider extends StatelessWidget {
                 flex: 6,
                 child: Stack(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: programma.copertina!.image,
-                          fit: BoxFit.fill,
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: programma.copertina!.image,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),
@@ -171,7 +177,7 @@ class OnAirAnimation extends StatelessWidget {
     Key? key,
     required AnimationController controller,
     required this.background,
-  })   : _controller = controller,
+  })  : _controller = controller,
         super(key: key);
 
   final AnimationController _controller;

@@ -39,12 +39,13 @@ class RadioPlayerMobile extends StatelessWidget {
                 children: [
                   Container(height: 200, child: WebRadioChooseWidget()),
                   Container(
-                    margin: EdgeInsets.only(left: 10, right: 10),
+                    padding: EdgeInsets.only(
+                        left: 24, right: 24, top: 24, bottom: 24),
+                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 8),
                     decoration: BoxDecoration(
                       color: context.homeContainerColor(),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(30),
                       ),
                       boxShadow: [
                         BoxShadow(
@@ -55,16 +56,10 @@ class RadioPlayerMobile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    padding: EdgeInsets.only(left: 24, right: 24, top: 8),
                     child: Column(
                       children: [
                         Container(
-                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           margin: EdgeInsets.only(bottom: 8),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(
-                                      color: Colors.white, width: 0.2))),
                           child: Row(
                             children: [
                               Text(
@@ -77,6 +72,22 @@ class RadioPlayerMobile extends StatelessWidget {
                           ),
                         ),
                         Container(
+                          decoration: BoxDecoration(
+                            color: context.homeContainerColor(),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
                           child: Column(
                             children: [
                               Row(
@@ -191,6 +202,9 @@ class RadioPlayerMobile extends StatelessWidget {
                     margin: EdgeInsets.only(left: 10, right: 10, bottom: 8),
                     decoration: BoxDecoration(
                       color: context.homeContainerColor(),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(30),
+                      ),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.3),

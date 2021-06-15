@@ -31,15 +31,20 @@ class Home extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 24, left: 10, right: 10),
-                    decoration: context.homeContainerStyle(),
-                    padding: EdgeInsets.only(
-                        left: 24, right: 24, top: 10, bottom: 24),
                     child: Column(
                       children: [
-                        CanzoneInOnda(),
-                        UltimiSuonatiInOnda(),
-                        UltimeUscite(),
-                        HitsRadio()
+                        CardHome(
+                          child: CanzoneInOnda(),
+                        ),
+                        CardHome(
+                          child: UltimiSuonatiInOnda(),
+                        ),
+                        CardHome(
+                          child: UltimeUscite(),
+                        ),
+                        CardHome(
+                          child: HitsRadio(),
+                        )
                       ],
                     ),
                   )
@@ -49,6 +54,22 @@ class Home extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class CardHome extends StatelessWidget {
+  Widget child;
+  EdgeInsets? padding;
+  CardHome({required this.child, this.padding});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding:
+          padding ?? EdgeInsets.only(left: 24, right: 24, top: 10, bottom: 24),
+      margin: EdgeInsets.only(bottom: 8),
+      decoration: context.cardHomeDecoration(),
+      child: this.child,
     );
   }
 }

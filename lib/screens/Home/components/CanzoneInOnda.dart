@@ -17,27 +17,22 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: double.infinity,
-          padding: EdgeInsets.only(top: 8, bottom: 8, left: 8),
+          padding: EdgeInsets.only(top: 8, bottom: 8),
           margin: EdgeInsets.only(bottom: 8),
-          decoration: BoxDecoration(
-              border:
-                  Border(bottom: BorderSide(color: Colors.white, width: 0.2))),
-          child: Text(
-            "Ora in onda",
-            style: context.oraInOndaTextStyle(),
+          child: Row(
+            children: [
+              Text(
+                "Ora in onda",
+                textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                style: context.ultimiSuonatiPlaylistTextStyle(),
+              )
+            ],
           ),
         ),
         Container(
-          height: 100,
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-          ),
+          height: 70,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

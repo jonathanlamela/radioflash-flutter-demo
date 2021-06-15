@@ -16,9 +16,9 @@ class NewsItem {
     item.data = DateTime.parse(json["date"] ?? DateTime.now());
     item.titolo = json["title"]?["rendered"] ?? "";
     item.estratto = json["excerpt"]?["rendered"] ?? "";
-    item.cover = Image.network((json["_embedded"]?["wp:featuredmedia"]?[0]
-            ["source_url"] ??
-        defaultCoverUrl));
+    print(json["jetpack_featured_media_url"]);
+    item.cover =
+        Image.network((json["jetpack_featured_media_url"] ?? defaultCoverUrl));
 
     return item;
   }
