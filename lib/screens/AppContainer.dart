@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/ThemeConfig.dart';
+import 'package:radioflash/models/Classifica.dart';
 import 'package:radioflash/screens/Notizie/Notizie.dart';
 import 'package:radioflash/services/NavigationProvider.dart';
 import 'package:radioflash/widgets/RadioPlayerBottom/RPBWidget.dart';
@@ -8,6 +9,7 @@ import 'package:radioflash/widgets/RadioPlayerBottom/RPBWidget.dart';
 import 'package:flutter/material.dart';
 
 import 'Home/Home.dart';
+import 'Classifica/ClassificaPage.dart';
 import 'RadioPlayer/RadioPlayer.dart';
 import '../widgets/RadioTopBar.dart';
 
@@ -37,13 +39,13 @@ class AppContainerState extends State<AppContainer> {
         label: "Radio",
       ),
       BottomNavigationBarItem(
+        icon: Icon(Icons.bar_chart),
+        label: "Classifica",
+      ),
+      BottomNavigationBarItem(
         icon: Icon(Icons.article),
         label: "Notizie",
       ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.settings_input_antenna),
-        label: "Frequenze",
-      )
     ];
 
     SystemChrome.setSystemUIOverlayStyle(
@@ -84,6 +86,9 @@ class AppContainerState extends State<AppContainer> {
                           key: UniqueKey(),
                         ),
                         RadioPlayer(
+                          key: UniqueKey(),
+                        ),
+                        ClassificaPage(
                           key: UniqueKey(),
                         ),
                         Notizie(
