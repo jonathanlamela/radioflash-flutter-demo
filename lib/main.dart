@@ -6,6 +6,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
+import 'package:radioflash/screens/FullPagePlayer/FullPagePlayer.dart';
 import 'package:radioflash/screens/Impostazioni/Impostazioni.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'RadioMeta.dart';
@@ -177,6 +178,14 @@ class MyApp extends StatelessWidget {
               return AudioServiceWidget(
                 child: AppContainer(),
               );
+            },
+          );
+        }
+
+        if (settings.name == 'fullpageplayer') {
+          return MaterialPageRoute(
+            builder: (context) {
+              return FullPagePlayer();
             },
           );
         }
