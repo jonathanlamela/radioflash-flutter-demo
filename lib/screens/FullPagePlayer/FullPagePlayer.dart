@@ -25,7 +25,7 @@ class FullPagePlayerState extends State<FullPagePlayer> {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            context.gradientStartColor(),
+            Colors.grey,
             context.gradiendEndColor(),
           ],
         ),
@@ -218,7 +218,6 @@ class FullPlayerAnimatedCoverState extends State<FullPageAnimatedCover>
         ),
       );
     } else {
-      print("SOno qui");
       return Center(
         child: Container(
           width: boxWidth,
