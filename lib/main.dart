@@ -1,9 +1,13 @@
 import 'dart:io';
 
 import 'package:audio_service/audio_service.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
+import 'package:radioflash/screens/Impostazioni/Impostazioni.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'RadioMeta.dart';
 import 'ThemeConfig.dart';
 import 'services/NavigationProvider.dart';
@@ -12,8 +16,121 @@ import 'services/PlayerProvider.dart';
 import 'package:flutter/material.dart';
 import 'screens/AppContainer.dart';
 import 'services/OnAirLatestSongProvider.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
-void main() {
+void _launchURL(_url) async => await canLaunch(_url)
+    ? await launch(_url, forceWebView: false)
+    : throw 'Could not launch $_url';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+}
+
+/// Create a [AndroidNotificationChannel] for heads up notifications
+AndroidNotificationChannel? channel;
+
+/// Initialize the [FlutterLocalNotificationsPlugin] package.
+FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin;
+
+String? linkToOpen;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  channel = const AndroidNotificationChannel(
+    'radioflash_news', // id
+    'Notifiche RadioFlash', // title
+    'Notifiche per le notizie RadioFlash', // description
+    importance: Importance.high,
+  );
+
+  flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+  await flutterLocalNotificationsPlugin!
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel!);
+
+  /// Update the iOS foreground notification presentation options to allow
+  /// heads up notifications.
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  final AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  final IOSInitializationSettings initializationSettingsIOS =
+      IOSInitializationSettings(
+    requestSoundPermission: true,
+    requestBadgePermission: true,
+    requestAlertPermission: true,
+  );
+
+  final InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+      macOS: null);
+
+  flutterLocalNotificationsPlugin!.initialize(
+    initializationSettings,
+    onSelectNotification: (payload) async {
+      launch(linkToOpen!);
+    },
+  );
+
+  var initialMessage = await messaging.getInitialMessage();
+
+  if (initialMessage != null) {
+    if (initialMessage.data.containsKey("url")) {
+      launch(initialMessage.data["url"]);
+    }
+  }
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    RemoteNotification notification = message.notification!;
+
+    if (message.data.containsKey("url")) {
+      linkToOpen = message.data["url"];
+    }
+
+    flutterLocalNotificationsPlugin!.show(
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel!.id,
+            channel!.name,
+            channel!.description,
+            icon: '@mipmap/ic_launcher',
+          ),
+        ));
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((message) {
+    if (message.data.containsKey("url")) {
+      launch(message.data["url"]);
+    }
+  });
+
   initializeDateFormatting('it_IT', null).then((_) => runApp(
         MultiProvider(
           providers: [
@@ -53,9 +170,34 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: context.themePrimary(),
           fontFamily: context.mainFontFamily()),
-      home: AudioServiceWidget(
-        child: AppContainer(),
-      ),
+      onGenerateRoute: (settings) {
+        if (settings.name == 'home') {
+          return MaterialPageRoute(
+            builder: (context) {
+              return AudioServiceWidget(
+                child: AppContainer(),
+              );
+            },
+          );
+        }
+
+        if (settings.name == 'impostazioni') {
+          return MaterialPageRoute(
+            builder: (context) {
+              return ImpostazioniScreen();
+            },
+          );
+        }
+
+        return MaterialPageRoute(
+          builder: (context) {
+            return AudioServiceWidget(
+              child: AppContainer(),
+            );
+          },
+        );
+      },
+      initialRoute: 'home',
     );
   }
 }
