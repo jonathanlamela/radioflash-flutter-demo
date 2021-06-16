@@ -121,7 +121,6 @@ void main() async {
             channel!.id,
             channel!.name,
             channel!.description,
-            icon: '@mipmap/ic_launcher',
           ),
         ));
   });
