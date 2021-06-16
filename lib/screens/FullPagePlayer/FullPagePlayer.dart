@@ -172,15 +172,13 @@ class FullPlayerAnimatedCoverState extends State<FullPageAnimatedCover>
   @override
   void dispose() {
     _animationController.dispose();
-    print("Dispose");
+
     super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-
-    print("Init state");
 
     _animationController = AnimationController(
       vsync: this,
@@ -251,9 +249,12 @@ class FullPlayerPlayButtonState extends State<FullPlayerPlayButton> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircleAvatar(
-            minRadius: 40,
-            backgroundColor: context.playPauseButtonColor(),
+          Container(
+            padding: EdgeInsets.all(7),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.white, width: 2),
+                color: Colors.transparent,
+                shape: BoxShape.circle),
             child: IconButton(
                 icon: (isPlaying != true
                     ? Icon(
