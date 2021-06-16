@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "625544631364",
+    "project_id": "com-realevent-radioflash",
+    "storage_bucket": "com-realevent-radioflash.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625544631364:android:24d6720aedab37d2aa5811",
+        "android_client_info": {
+          "package_name": "com.realeventsrl.radioflash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "625544631364-0q01e7m2s2c5c88b1j3fo81fctmi748h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlXV632pqDrodx28m3qeDc6RhxBvHyRTk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "625544631364-0q01e7m2s2c5c88b1j3fo81fctmi748h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
