@@ -76,7 +76,7 @@ void main() async {
   );
 
   final AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('ic_logo_vettoriale');
 
   final IOSInitializationSettings initializationSettingsIOS =
       IOSInitializationSettings(
@@ -121,6 +121,7 @@ void main() async {
             channel!.id,
             channel!.name,
             channel!.description,
+            color: Colors.red[900],
           ),
         ));
   });
