@@ -222,16 +222,7 @@ class FullPlayerAnimatedCoverState extends State<FullPageAnimatedCover>
         child: Container(
           width: boxWidth,
           height: boxHeight,
-          padding: EdgeInsets.all(16),
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.white,
-                spreadRadius: 15,
-                blurRadius: 5,
-                offset: Offset(0, 0), // changes position of shadow
-              ),
-            ],
             borderRadius: BorderRadius.all(
               Radius.circular(15),
             ),
