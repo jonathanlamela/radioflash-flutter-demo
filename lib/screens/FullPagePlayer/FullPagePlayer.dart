@@ -4,7 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/services/PlayerProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
+
 import '../../ThemeConfig.dart';
+import 'FullPageAnimatedCover.dart';
+import 'FullPlayerPlayButton.dart';
 
 class FullPagePlayer extends StatefulWidget {
   @override
@@ -147,144 +150,5 @@ class FullPagePlayerState extends State<FullPagePlayer> {
         ),
       ),
     );
-  }
-}
-
-class FullPageAnimatedCover extends StatefulWidget {
-  final Image? image;
-  final bool? isPlaying;
-  FullPageAnimatedCover({this.image, this.isPlaying = false});
-  @override
-  State<StatefulWidget> createState() {
-    return FullPlayerAnimatedCoverState();
-  }
-}
-
-class FullPlayerAnimatedCoverState extends State<FullPageAnimatedCover>
-    with SingleTickerProviderStateMixin {
-  double boxWidth = 300;
-  double boxHeight = 300;
-
-  late AnimationController _animationController;
-  late Animation<int> animation;
-  Widget? child;
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 1),
-    )..repeat(reverse: true);
-    animation = Tween(end: 25, begin: 5).animate(_animationController);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.isPlaying!) {
-      return Center(
-        child: AnimatedBuilder(
-          animation: animation,
-          builder: (context, child) {
-            return Container(
-              width: boxWidth,
-              height: boxHeight,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white.withOpacity(0.4),
-                    spreadRadius: 5,
-                    blurRadius: _animationController.value * 100,
-                    offset: Offset(0, 0), // changes position of shadow
-                  ),
-                ],
-                borderRadius: BorderRadius.all(
-                  Radius.circular(15),
-                ),
-              ),
-              child: widget.image,
-            );
-          },
-        ),
-      );
-    } else {
-      return Center(
-        child: Container(
-          width: boxWidth,
-          height: boxHeight,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15),
-            ),
-          ),
-          child: widget.image,
-        ),
-      );
-    }
-  }
-}
-
-class FullPlayerPlayButton extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return FullPlayerPlayButtonState();
-  }
-}
-
-class FullPlayerPlayButtonState extends State<FullPlayerPlayButton> {
-  var isPlaying = false;
-  @override
-  Widget build(BuildContext context) {
-    isPlaying = Provider.of<PlayerProvider>(context, listen: true).isPlaying;
-    var content = Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.all(7),
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.white, width: 2),
-                color: Colors.transparent,
-                shape: BoxShape.circle),
-            child: IconButton(
-                icon: (isPlaying != true
-                    ? Icon(
-                        Icons.play_arrow_rounded,
-                      )
-                    : Icon(
-                        Icons.pause,
-                      )),
-                color: context.playPauseButtonIconColor(),
-                onPressed: () {
-                  if (isPlaying) {
-                    Provider.of<PlayerProvider>(context, listen: false).stop();
-                  } else {
-                    Provider.of<PlayerProvider>(context, listen: false).play();
-                  }
-                }),
-          )
-        ],
-      ),
-    );
-
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [Flexible(child: content)]))
-        ]);
   }
 }
