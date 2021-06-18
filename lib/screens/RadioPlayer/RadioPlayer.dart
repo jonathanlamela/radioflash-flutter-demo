@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:radioflash/screens/RadioPlayer/components/ContattoInterazione.dart';
 
 import './components/WebRadioChoose.dart';
 
@@ -220,6 +221,25 @@ class RadioPlayerMobile extends StatelessWidget {
                     ),
                     padding: EdgeInsets.all(16),
                     child: UltimiSuonatiPlaylist(),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 8),
+                    decoration: BoxDecoration(
+                      color: context.homeContainerColor(),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    padding: EdgeInsets.all(16),
+                    child: ContattoInterazione(),
                   ),
                 ],
               ),
