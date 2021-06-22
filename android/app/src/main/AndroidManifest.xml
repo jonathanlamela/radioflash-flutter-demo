@@ -16,6 +16,15 @@
     android:usesCleartextTraffic="true"
     android:icon="@mipmap/ic_launcher"
   >
+
+   <meta-data
+      android:name="com.google.firebase.messaging.default_notification_icon"
+      android:resource="@drawable/ic_logo_vettoriale"
+    />
+<meta-data
+      android:name="com.google.firebase.messaging.default_notification_color"
+      android:resource="@color/primario"
+    />
         <activity
       android:name=".MainActivity"
       android:launchMode="singleTop"
@@ -42,14 +51,7 @@
         android:resource="@drawable/launch_background"
       />
 
-      <meta-data
-        android:name="com.google.firebase.messaging.default_notification_icon"
-        android:resource="@drawable/ic_logo_vettoriale"
-      />
-<meta-data
-        android:name="com.google.firebase.messaging.default_notification_color"
-        android:resource="@color/primario"
-      />
+     
     
       <meta-data
         android:name="com.google.firebase.messaging.default_notification_channel_id"
