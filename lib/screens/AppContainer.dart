@@ -1,12 +1,13 @@
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/ThemeConfig.dart';
-import 'package:radioflash/models/Classifica.dart';
+import 'package:radioflash/screens/NoInternet.dart';
 import 'package:radioflash/screens/Notizie/Notizie.dart';
 import 'package:radioflash/services/NavigationProvider.dart';
 import 'package:radioflash/widgets/RadioPlayerBottom/RPBWidget.dart';
 
 import 'package:flutter/material.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'Home/Home.dart';
 import 'Classifica/ClassificaPage.dart';
@@ -66,41 +67,58 @@ class AppContainerState extends State<AppContainer> {
         value: SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
         child: Scaffold(
           backgroundColor: context.scaffoldBackgroundColor(),
-          body: Stack(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+          body: FutureBuilder(
+            builder: (context, snapshot) {
+              Widget container = Stack(
                 children: [
-                  RadioTopBar(),
-                  Expanded(
-                    child: PageView(
-                      scrollDirection: Axis.horizontal,
-                      controller: pageController,
-                      onPageChanged: (value) {
-                        Provider.of<NavigationProvider>(context, listen: false)
-                            .setPage(value);
-                      },
-                      children: [
-                        Home(
-                          key: UniqueKey(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      RadioTopBar(),
+                      Expanded(
+                        child: PageView(
+                          scrollDirection: Axis.horizontal,
+                          controller: pageController,
+                          onPageChanged: (value) {
+                            Provider.of<NavigationProvider>(context,
+                                    listen: false)
+                                .setPage(value);
+                          },
+                          children: [
+                            Home(
+                              key: UniqueKey(),
+                            ),
+                            RadioPlayer(
+                              key: UniqueKey(),
+                            ),
+                            ClassificaPage(
+                              key: UniqueKey(),
+                            ),
+                            Notizie(
+                              key: UniqueKey(),
+                            ),
+                          ],
                         ),
-                        RadioPlayer(
-                          key: UniqueKey(),
-                        ),
-                        ClassificaPage(
-                          key: UniqueKey(),
-                        ),
-                        Notizie(
-                          key: UniqueKey(),
-                        ),
-                      ],
-                    ),
+                      ),
+                      RPBWidget()
+                    ],
                   ),
-                  RPBWidget()
                 ],
-              ),
-            ],
+              );
+
+              if (snapshot.hasData) {
+                if ((snapshot.data as ConnectivityResult) ==
+                    ConnectivityResult.none) {
+                  container = Container(
+                    child: NoInternet(),
+                  );
+                }
+              }
+
+              return container;
+            },
+            future: checkConnection(),
           ),
           appBar: PreferredSize(
             child: AppBar(
@@ -138,4 +156,8 @@ class AppContainerState extends State<AppContainer> {
       ),
     );
   }
+}
+
+Future<ConnectivityResult> checkConnection() async {
+  return await Connectivity().checkConnectivity();
 }
