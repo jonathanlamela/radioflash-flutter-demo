@@ -35,26 +35,29 @@ class FullPagePlayerState extends State<FullPagePlayer> {
       ),
       child: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(statusBarBrightness: Brightness.dark),
-        child: Scaffold(
-          backgroundColor: context.scaffoldBackgroundColor(),
-          body: Stack(
-            children: [
-              Column(
+        child: SafeArea(
+          child: Scaffold(
+            backgroundColor: context.scaffoldBackgroundColor(),
+            body: Container(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
+                  Container(
+                    height: 40,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Expanded(
                     child: Container(
@@ -63,74 +66,87 @@ class FullPagePlayerState extends State<FullPagePlayer> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Consumer<PlayerProvider>(
-                            builder: (context, value, child) {
-                              Widget child = LoadingProgress();
-                              if (value.currentList.isNotEmpty) {
-                                child = Container(
-                                  key: UniqueKey(),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: SizedBox(
-                                          width: 300,
-                                          height: 300,
-                                          child: FullPageAnimatedCover(
-                                              isPlaying: value.isPlaying,
-                                              image: value
-                                                  .currentList.first.cover),
-                                        ),
-                                      ),
-                                      Container(
-                                        padding: EdgeInsets.only(top: 24),
-                                        height: 200,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Flexible(
-                                              child: Text(
-                                                value.currentList.first.title,
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
+                          Flexible(
+                            flex: 6,
+                            child: Consumer<PlayerProvider>(
+                              builder: (context, value, child) {
+                                Widget child = LoadingProgress();
+                                if (value.currentList.isNotEmpty) {
+                                  child = Container(
+                                    width: double.infinity,
+                                    key: UniqueKey(),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Flexible(
+                                          flex: 4,
+                                          child: Container(
+                                            padding: EdgeInsets.only(left: 10),
+                                            child: SizedBox(
+                                              child: FullPageAnimatedCover(
+                                                  isPlaying: value.isPlaying,
+                                                  image: value
+                                                      .currentList.first.cover),
                                             ),
-                                            Flexible(
-                                              child: Text(
-                                                value.currentList.first.artist,
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
-                                            )
-                                          ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }
+                                        Flexible(
+                                          flex: 2,
+                                          child: Container(
+                                            padding: EdgeInsets.only(top: 24),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                Flexible(
+                                                  child: Text(
+                                                    value.currentList.first
+                                                        .title,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Flexible(
+                                                  child: Text(
+                                                    value.currentList.first
+                                                        .artist,
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }
 
-                              return AnimatedSwitcher(
-                                child: child,
-                                duration: Duration(milliseconds: 700),
-                              );
-                            },
+                                return AnimatedSwitcher(
+                                  child: child,
+                                  duration: Duration(milliseconds: 700),
+                                );
+                              },
+                            ),
                           ),
-                          Container(
-                            height: 100,
-                            child: FullPlayerPlayButton(),
+                          Flexible(
+                            flex: 2,
+                            child: Container(
+                              child: FullPlayerPlayButton(),
+                            ),
                           )
                         ],
                       ),
@@ -138,14 +154,14 @@ class FullPagePlayerState extends State<FullPagePlayer> {
                   )
                 ],
               ),
-            ],
-          ),
-          appBar: PreferredSize(
-            child: AppBar(
-                brightness: Brightness.dark,
-                elevation: 0,
-                backgroundColor: context.statusBarColor()),
-            preferredSize: Size.fromHeight(0),
+            ),
+            appBar: PreferredSize(
+              child: AppBar(
+                  brightness: Brightness.dark,
+                  elevation: 0,
+                  backgroundColor: context.statusBarColor()),
+              preferredSize: Size.fromHeight(0),
+            ),
           ),
         ),
       ),
