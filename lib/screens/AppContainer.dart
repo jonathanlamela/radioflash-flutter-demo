@@ -36,10 +36,6 @@ class AppContainerState extends State<AppContainer> {
         label: "Home",
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.radio),
-        label: "Radio",
-      ),
-      BottomNavigationBarItem(
         icon: Icon(Icons.bar_chart),
         label: "Classifica",
       ),
@@ -87,9 +83,6 @@ class AppContainerState extends State<AppContainer> {
                           },
                           children: [
                             Home(
-                              key: UniqueKey(),
-                            ),
-                            RadioPlayer(
                               key: UniqueKey(),
                             ),
                             ClassificaPage(
