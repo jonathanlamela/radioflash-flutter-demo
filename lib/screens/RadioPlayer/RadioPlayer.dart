@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:radioflash/screens/RadioPlayer/components/ContattoInterazione.dart';
 
@@ -8,7 +8,6 @@ import 'components/WebRadioChoose.dart';
 import 'components/UltimiSuonatiPlaylist.dart';
 import "../../ThemeConfig.dart";
 
-var frequenzeSicilia = ["90.6", "93.5", "97.3", "99.7", "104.9"];
 var frequenzeCampania = ["93.7", "93.8", "95.4", "106.9"];
 
 class RadioPlayer extends StatelessWidget {
@@ -39,170 +38,7 @@ class RadioPlayerMobile extends StatelessWidget {
               child: Column(
                 children: [
                   Container(height: 200, child: WebRadioChooseWidget()),
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    margin: EdgeInsets.only(left: 10, right: 10, bottom: 8),
-                    decoration: BoxDecoration(
-                      color: context.homeContainerColor(),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(15),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(bottom: 8),
-                          padding: EdgeInsets.only(bottom: 8),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(
-                                      color: Colors.white, width: 0.2))),
-                          child: Row(
-                            children: [
-                              Text(
-                                "Frequenze",
-                                textScaleFactor:
-                                    MediaQuery.of(context).textScaleFactor,
-                                style: context.ultimiSuonatiPlaylistTextStyle(),
-                              )
-                            ],
-                          ),
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: context.homeContainerColor(),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "SICILIA (FM)",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: List.generate(
-                                            frequenzeSicilia.length, (index) {
-                                          return Container(
-                                            padding: EdgeInsets.only(right: 8),
-                                            child: Text(
-                                              frequenzeSicilia.elementAt(index),
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16),
-                                            ),
-                                          );
-                                        }),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "CAMPANIA (FM)",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: List.generate(
-                                            frequenzeCampania.length, (index) {
-                                          return Container(
-                                            padding: EdgeInsets.only(right: 8),
-                                            child: Text(
-                                              frequenzeCampania
-                                                  .elementAt(index),
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16),
-                                            ),
-                                          );
-                                        }),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "MALTA,GOZO E SUD SICILIA (DAB+)",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.only(right: 8),
-                                            child: Text(
-                                              "6C",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16),
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  FrequenzeRadio(),
                   Container(
                     margin: EdgeInsets.only(left: 10, right: 10, bottom: 8),
                     decoration: BoxDecoration(
@@ -302,3 +138,4 @@ class RadioPlayerTablet extends StatelessWidget {
     );
   }
 }
+*/

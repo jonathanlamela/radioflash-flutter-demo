@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:radioflash/ThemeConfig.dart';
 import 'package:radioflash/models/TrackItem.dart';
+import 'package:radioflash/services/PlayerProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 
 import '../../../services/OnAirLatestSongProvider.dart';
@@ -43,7 +44,7 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: Consumer<OnAirLatestSongProvider>(
+                child: Consumer<PlayerProvider>(
                   builder: (context, value, child) {
                     return AnimatedSwitcher(
                       child: value.currentList.isNotEmpty
