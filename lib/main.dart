@@ -113,18 +113,22 @@ void main() async {
       linkToOpen = message.data["url"];
     }
 
-    flutterLocalNotificationsPlugin!.show(
-        notification.hashCode,
-        notification.title,
-        notification.body,
-        NotificationDetails(
-          android: AndroidNotificationDetails(
-            channel!.id,
-            channel!.name,
-            channel!.description,
-            color: Colors.red[900],
-          ),
-        ));
+    AndroidNotification? android = message.notification?.android;
+
+    if (android != null) {
+      flutterLocalNotificationsPlugin!.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel!.id,
+              channel!.name,
+              channel!.description,
+              color: Colors.red[900],
+            ),
+          ));
+    }
   });
   FirebaseMessaging.onMessageOpenedApp.listen((message) {
     if (message.data.containsKey("url")) {
