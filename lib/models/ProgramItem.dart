@@ -16,6 +16,7 @@ class ProgramItem {
     item.orarioInizio = DateTime.parse("1970-01-01 ${json["orarioInizio"]}");
     item.orarioFine = DateTime.parse("1970-01-01 ${json["orarioFine"]}");
     item.speaker = json["speaker"] ?? "";
+
     item.copertina = Image.network(json["cover"]);
 
     return item;
