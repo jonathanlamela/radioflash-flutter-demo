@@ -3,7 +3,7 @@ var defaultCoverUrl =
     "https://admuzzum.xdevel.com/cloud/x/35/im/png/2019/10/11/3e812e02.png-512,512.png";
 
 var onAirNowLink = dominio + "/wp-json/rdf/onair/now";
-var ultimaClassificaLink = dominio + "/wp-json/classifica/latest";
+var ultimaClassificaLink = "https://www.imusicfun.it/wp-json/classifica/latest";
 var newsLink = dominio + "/wp-json/wp/v2/posts?_embed";
 
 var ultimeUsciteLink =
