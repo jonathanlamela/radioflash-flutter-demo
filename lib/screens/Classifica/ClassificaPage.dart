@@ -11,8 +11,8 @@ import 'package:http/http.dart' as http;
 Future<List<DropdownMenuItem<String>>> anniClassifica() async {
   var httpClient = http.Client();
 
-  var response =
-      await httpClient.get(Uri.parse(dominio + "/wp-json/classifica/anni"));
+  var response = await httpClient
+      .get(Uri.parse("http://www.imusicfun.it/wp-json/classifica/anni"));
 
   var jsonResponse = jsonDecode(response.body);
 
@@ -34,8 +34,8 @@ Future<List<DropdownMenuItem<String>>> anniClassifica() async {
 Future<List<Classifica>> scaricaClassifiche(anno) async {
   var httpClient = http.Client();
 
-  var response =
-      await httpClient.get(Uri.parse(dominio + "/wp-json/classifica/" + anno));
+  var response = await httpClient
+      .get(Uri.parse("http://www.imusicfun.it/wp-json/classifica/" + anno));
 
   var jsonResponse = jsonDecode(response.body)["items"];
 

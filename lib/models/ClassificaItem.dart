@@ -25,7 +25,7 @@ class ClassificaItem {
     item.posmax = json["posmax"] ?? '';
 
     if (json["cover"] != null) {
-      json["cover"] = dominio + json["cover"];
+      json["cover"] = json["cover"];
     }
 
     item.cover = Image.network((json["cover"]) ?? defaultCoverUrl);
