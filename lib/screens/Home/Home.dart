@@ -67,8 +67,8 @@ class Home extends StatelessWidget {
 }
 
 class CardHome extends StatelessWidget {
-  Widget child;
-  EdgeInsets? padding;
+  final Widget child;
+  final EdgeInsets? padding;
   CardHome({required this.child, this.padding});
   @override
   Widget build(BuildContext context) {

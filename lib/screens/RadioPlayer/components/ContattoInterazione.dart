@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../ThemeConfig.dart';
 
-void _launchURL(_url) async => await canLaunch(_url)
-    ? await launch(_url, forceWebView: false)
-    : throw 'Could not launch $_url';
-
 class ContattoInterazione extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

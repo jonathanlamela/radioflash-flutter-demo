@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:radioflash/services/PlayerProvider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:radioflash/bloc/player_bloc.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 
 import '../../ThemeConfig.dart';
@@ -68,8 +68,8 @@ class FullPagePlayerState extends State<FullPagePlayer> {
                         children: [
                           Flexible(
                             flex: 6,
-                            child: Consumer<PlayerProvider>(
-                              builder: (context, value, child) {
+                            child: BlocBuilder<PlayerBloc, PlayerState>(
+                              builder: (context, value) {
                                 Widget child = LoadingProgress();
                                 if (value.currentList.isNotEmpty) {
                                   child = Container(

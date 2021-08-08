@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:radioflash/ThemeConfig.dart';
+import 'package:radioflash/bloc/player_bloc.dart';
 import 'package:radioflash/models/TrackItem.dart';
-import 'package:radioflash/services/PlayerProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
-
-import '../../../services/OnAirLatestSongProvider.dart';
 
 class CanzoneInOnda extends StatefulWidget {
   @override
@@ -44,8 +42,8 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: Consumer<PlayerProvider>(
-                  builder: (context, value, child) {
+                child: BlocBuilder<PlayerBloc, PlayerState>(
+                  builder: (context, value) {
                     return AnimatedSwitcher(
                       child: value.currentList.isNotEmpty
                           ? SongInfo(item: value.currentList.first)

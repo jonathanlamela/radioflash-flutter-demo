@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:radioflash/bloc/player_bloc.dart';
 
 import '../../ThemeConfig.dart';
-import '../../services/PlayerProvider.dart';
 import 'RPBAnimatedCover.dart';
 
 class RPBSongInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var mainContent = Consumer<PlayerProvider>(
-      builder: (context, value, child) {
+    var mainContent = BlocBuilder<PlayerBloc, PlayerState>(
+      builder: (context, value) {
         Widget child = Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

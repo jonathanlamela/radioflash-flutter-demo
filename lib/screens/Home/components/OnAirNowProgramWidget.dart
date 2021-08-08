@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:radioflash/ThemeConfig.dart';
+import 'package:radioflash/bloc/onairprogram_bloc.dart';
 import 'package:radioflash/models/ProgramItem.dart';
-import 'package:radioflash/services/OnAirProgramProvider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 import 'package:radioflash/widgets/RadioSize.dart';
 
@@ -48,8 +48,8 @@ class OnAirNowProgramWidgetState extends State<OnAirNowProgramWidget>
 
   @override
   Widget build(BuildContext context) {
-    var consumer = Consumer<OnAirProgramProvider>(
-      builder: (context, value, child) {
+    var consumer = BlocBuilder<OnairprogramBloc, OnairprogramState>(
+      builder: (context, value) {
         return AnimatedSwitcher(
             duration: Duration(milliseconds: 800),
             child: value.currentList.isNotEmpty

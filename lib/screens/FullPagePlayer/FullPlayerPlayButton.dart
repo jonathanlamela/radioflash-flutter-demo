@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:radioflash/services/PlayerProvider.dart';
+import 'package:radioflash/bloc/player_bloc.dart';
 import '../../ThemeConfig.dart';
 
 class FullPlayerPlayButton extends StatefulWidget {
@@ -14,7 +14,7 @@ class FullPlayerPlayButtonState extends State<FullPlayerPlayButton> {
   var isPlaying = false;
   @override
   Widget build(BuildContext context) {
-    isPlaying = Provider.of<PlayerProvider>(context, listen: true).isPlaying;
+    isPlaying = context.watch<PlayerBloc>().isPlaying;
     var content = Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -37,9 +37,13 @@ class FullPlayerPlayButtonState extends State<FullPlayerPlayButton> {
                 color: context.playPauseButtonIconColor(),
                 onPressed: () {
                   if (isPlaying) {
-                    Provider.of<PlayerProvider>(context, listen: false).stop();
+                    context
+                        .read<PlayerBloc>()
+                        .add(PlayerPlayingChangeEvent(isPlaying: false));
                   } else {
-                    Provider.of<PlayerProvider>(context, listen: false).play();
+                    context
+                        .read<PlayerBloc>()
+                        .add(PlayerPlayingChangeEvent(isPlaying: true));
                   }
                 }),
           )

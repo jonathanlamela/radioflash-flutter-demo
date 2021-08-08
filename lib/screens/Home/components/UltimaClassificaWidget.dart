@@ -1,14 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:radioflash/models/Classifica.dart';
-import 'package:radioflash/widgets/LoadingProgress.dart';
 
 import '../../../RadioMeta.dart';
-import '../../../ThemeConfig.dart';
 
 Future<Classifica> downloadLatestChart() async {
   var httpClient = http.Client();
