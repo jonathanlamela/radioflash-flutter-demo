@@ -1,70 +1,34 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:radioflash/RadioMeta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:radioflash/bloc/classifica_bloc.dart';
+import 'package:radioflash/cubit/annoclassifica_cubit.dart';
 import 'package:radioflash/models/Classifica.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 import "../../ThemeConfig.dart";
-import 'package:http/http.dart' as http;
-
-Future<List<DropdownMenuItem<String>>> anniClassifica() async {
-  var httpClient = http.Client();
-
-  var response = await httpClient
-      .get(Uri.parse("http://www.imusicfun.it/wp-json/classifica/anni"));
-
-  var jsonResponse = jsonDecode(response.body);
-
-  var list = <DropdownMenuItem<String>>[];
-  jsonResponse.forEach((item) {
-    list.add(
-      DropdownMenuItem(
-        value: item["Anno"],
-        child: Text(
-          item["Anno"],
-        ),
-      ),
-    );
-  });
-
-  return list;
-}
-
-Future<List<Classifica>> scaricaClassifiche(anno) async {
-  var httpClient = http.Client();
-
-  var response = await httpClient
-      .get(Uri.parse("http://www.imusicfun.it/wp-json/classifica/" + anno));
-
-  var jsonResponse = jsonDecode(response.body)["items"];
-
-  return compute(parseCharts, jsonResponse);
-}
-
-List<Classifica> parseCharts(response) {
-  var list = <Classifica>[];
-
-  list = response.map<Classifica>((e) => Classifica.fromJson(e)).toList();
-
-  return list;
-}
 
 class ClassificaPage extends StatefulWidget {
   ClassificaPage({Key? key}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() {
-    return ClassificaPageState();
-  }
+  _ClassificaPageState createState() => _ClassificaPageState();
 }
 
-class ClassificaPageState extends State<ClassificaPage> {
-  String? annoSelezionato;
-  List<Classifica> charts = [];
-  Classifica? currentChart;
+class _ClassificaPageState extends State<ClassificaPage> {
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    context.read<ClassificaBloc>().startListenAnno();
+    context.read<AnnoclassificaCubit>().initAnni();
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height,
@@ -112,26 +76,8 @@ class ClassificaPageState extends State<ClassificaPage> {
                       ],
                     ),
                   ),
-                  AnnoControls(
-                    current: annoSelezionato,
-                    onAnnoSelected: (anno) async {
-                      var items = await scaricaClassifiche(anno);
-                      setState(() {
-                        this.charts = items;
-                        this.annoSelezionato = anno;
-                        this.currentChart = this.charts.first;
-                      });
-                    },
-                  ),
-                  ClassificaControls(
-                    charts: charts,
-                    current: currentChart,
-                    onClassificaChange: (chart) {
-                      setState(() {
-                        this.currentChart = chart;
-                      });
-                    },
-                  ),
+                  AnnoControls(),
+                  ClassificaControls(),
                   Expanded(
                     child: Container(
                       padding: EdgeInsets.only(top: 20),
@@ -140,7 +86,6 @@ class ClassificaPageState extends State<ClassificaPage> {
                           duration: Duration(milliseconds: 400),
                           child: ClassificaRender(
                             key: UniqueKey(),
-                            classifica: currentChart,
                           ),
                         ),
                       ),
@@ -157,9 +102,7 @@ class ClassificaPageState extends State<ClassificaPage> {
 }
 
 class AnnoControls extends StatelessWidget {
-  String? current;
-  Function? onAnnoSelected;
-  AnnoControls({Key? key, this.current, this.onAnnoSelected}) : super(key: key);
+  AnnoControls({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -180,32 +123,34 @@ class AnnoControls extends StatelessWidget {
               ),
             ),
           ),
-          FutureBuilder(
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                var items = snapshot.data as List<DropdownMenuItem<String>>;
-                if (current == null) {
-                  this.current = items.first.value;
-                  this.onAnnoSelected!(this.current);
-                }
+          BlocBuilder<AnnoclassificaCubit, AnnoclassificaState>(
+            builder: (context, state) {
+              if (state is AnnoClassificaUpdateState) {
                 return Expanded(
                   child: Container(
                     child: DropdownButton(
-                      isExpanded: true,
-                      dropdownColor: Colors.black,
-                      style: TextStyle(color: Colors.white),
-                      value: current,
-                      onChanged: (value) {},
-                      items: items,
-                    ),
+                        isExpanded: true,
+                        dropdownColor: Colors.black,
+                        style: TextStyle(color: Colors.white),
+                        onChanged: (value) {
+                          context.read<AnnoclassificaCubit>().cambiaAnno(value);
+                        },
+                        value: state.Selected,
+                        items: List.generate(state.Anni.length, (index) {
+                          return DropdownMenuItem(
+                            value: state.Anni.elementAt(index),
+                            child: Text(
+                              state.Anni.elementAt(index),
+                            ),
+                          );
+                        })),
                   ),
                 );
               } else {
                 return Container();
               }
             },
-            future: anniClassifica(),
-          )
+          ),
         ],
       ),
     );
@@ -213,13 +158,6 @@ class AnnoControls extends StatelessWidget {
 }
 
 class ClassificaControls extends StatelessWidget {
-  Classifica? current;
-  Function? onClassificaChange;
-  ClassificaControls(
-      {Key? key, this.current, this.onClassificaChange, this.charts})
-      : super(key: key);
-  List<Classifica>? charts;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -239,26 +177,38 @@ class ClassificaControls extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: Container(
-              child: DropdownButton(
-                isExpanded: true,
-                dropdownColor: Colors.black,
-                style: TextStyle(color: Colors.white),
-                value: current,
-                onChanged: (value) {
-                  onClassificaChange!(value);
-                },
-                items: List.generate(charts!.length, (index) {
-                  return DropdownMenuItem(
-                    value: charts!.elementAt(index),
-                    child: Text(
-                      charts!.elementAt(index).titolo!,
+          BlocBuilder<ClassificaBloc, ClassificaState>(
+            builder: (context, state) {
+              if (state is ClassificaResultsState) {
+                return Expanded(
+                  child: Container(
+                    child: DropdownButton(
+                      isExpanded: true,
+                      dropdownColor: Colors.black,
+                      style: TextStyle(color: Colors.white),
+                      value: state.selected,
+                      onChanged: (value) {
+                        context.read<ClassificaBloc>().add(
+                            ClassificaSelectionChangedEvent(
+                                state.Results, value as Classifica));
+                      },
+                      items: List.generate(state.Results.length, (index) {
+                        return DropdownMenuItem(
+                          value: state.Results.elementAt(index),
+                          child: Text(
+                            state.Results.elementAt(index).titolo!,
+                          ),
+                        );
+                      }),
                     ),
-                  );
-                }),
-              ),
-            ),
+                  ),
+                );
+              } else {
+                return Expanded(
+                  child: Container(),
+                );
+              }
+            },
           )
         ],
       ),
@@ -267,123 +217,135 @@ class ClassificaControls extends StatelessWidget {
 }
 
 class ClassificaRender extends StatelessWidget {
-  Classifica? classifica;
-  ClassificaRender({Key? key, required this.classifica}) : super(key: key);
+  ClassificaRender({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (classifica != null) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(
-          classifica!.items.length,
-          (index) {
-            var item = classifica!.items.elementAt(index);
-            var symbol = Icon(Icons.arrow_drop_up, color: Colors.green);
+    return BlocBuilder<ClassificaBloc, ClassificaState>(
+      builder: (context, state) {
+        if (state is ClassificaResultsState) {
+          if (state.selected != null) {
+            return Column(
+              key: UniqueKey(),
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(
+                state.selected!.items.length,
+                (index) {
+                  var item = state.selected!.items.elementAt(index);
+                  var symbol = Icon(Icons.arrow_drop_up, color: Colors.green);
 
-            switch (item.movement) {
-              case "=":
-                {
-                  symbol = Icon(Icons.swap_vert, color: Colors.yellow);
-                }
-                break;
-              case "up":
-                {
-                  symbol = Icon(Icons.arrow_upward, color: Colors.greenAccent);
-                }
-                break;
-              case "down":
-                {
-                  symbol = Icon(Icons.arrow_downward, color: Colors.redAccent);
-                }
-                break;
-            }
-            return Container(
-              height: 60,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(8),
+                  switch (item.movement) {
+                    case "=":
+                      {
+                        symbol = Icon(Icons.swap_vert, color: Colors.yellow);
+                      }
+                      break;
+                    case "up":
+                      {
+                        symbol =
+                            Icon(Icons.arrow_upward, color: Colors.greenAccent);
+                      }
+                      break;
+                    case "down":
+                      {
+                        symbol =
+                            Icon(Icons.arrow_downward, color: Colors.redAccent);
+                      }
+                      break;
+                  }
+                  return Container(
+                    height: 60,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text("${index + 1}",
-                            style: context.classificaNumeroTextStyle()),
-                        symbol,
-                      ],
-                    ),
-                  ),
-                  AspectRatio(
-                    aspectRatio: 1 / 1,
-                    child: Container(
-                        margin: EdgeInsets.all(4),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(5),
-                          ),
-                          child: FittedBox(
-                            child: item.cover,
-                            fit: BoxFit.fill,
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("${index + 1}",
+                                  style: context.classificaNumeroTextStyle()),
+                              symbol,
+                            ],
                           ),
                         ),
-                        decoration: context.classificaCoverDecoration()),
-                  ),
-                  Flexible(
-                    flex: 6,
-                    child: Row(
-                      children: [
-                        Flexible(
+                        AspectRatio(
+                          aspectRatio: 1 / 1,
                           child: Container(
-                            padding: EdgeInsets.only(left: 8),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.titolo!,
-                                  style: context.classificaSongTitleTextStyle(),
-                                  overflow: TextOverflow.ellipsis,
+                              margin: EdgeInsets.all(4),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
                                 ),
-                                Row(children: [
-                                  Flexible(
-                                    child: Text(
-                                      stringAutori(item.autori),
-                                      overflow: TextOverflow.ellipsis,
-                                      style: context
-                                          .classificaSongAuthorsTextStyle(),
-                                    ),
-                                  )
-                                ]),
-                              ],
-                            ),
-                          ),
+                                child: FittedBox(
+                                  child: item.cover,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              decoration: context.classificaCoverDecoration()),
                         ),
+                        Flexible(
+                          flex: 6,
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: Container(
+                                  padding: EdgeInsets.only(left: 8),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        item.titolo!,
+                                        style: context
+                                            .classificaSongTitleTextStyle(),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Row(children: [
+                                        Flexible(
+                                          child: Text(
+                                            stringAutori(item.autori),
+                                            overflow: TextOverflow.ellipsis,
+                                            style: context
+                                                .classificaSongAuthorsTextStyle(),
+                                          ),
+                                        )
+                                      ]),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
-                  )
-                ],
+                  );
+                },
               ),
             );
-          },
-        ),
-      );
-    } else {
-      return LoadingProgress();
-    }
+          } else {
+            return LoadingProgress();
+          }
+        } else {
+          return LoadingProgress();
+        }
+      },
+    );
   }
+}
 
-  String stringAutori(autori) {
-    String result = "";
+String stringAutori(autori) {
+  String result = "";
 
-    List.generate(autori.length, (index) {
-      result += autori.elementAt(index).name! +
-          (autori.length > 1 && index < autori.length - 1 ? " & " : "");
-    });
+  List.generate(autori.length, (index) {
+    result += autori.elementAt(index).name! +
+        (autori.length > 1 && index < autori.length - 1 ? " & " : "");
+  });
 
-    return result;
-  }
+  return result;
 }

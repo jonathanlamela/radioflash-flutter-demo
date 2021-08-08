@@ -14,7 +14,6 @@ class ImpostazioniScreenState extends State<ImpostazioniScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     getNotifyNotizieStatus();

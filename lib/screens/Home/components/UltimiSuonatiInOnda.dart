@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:radioflash/bloc/latestsong_bloc.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 import 'package:radioflash/widgets/UltimiSuonatiList.dart';
 
 import "../../../ThemeConfig.dart";
-import '../../../services/OnAirLatestSongProvider.dart';
 
 class UltimiSuonatiInOnda extends StatelessWidget {
   @override
@@ -31,8 +31,8 @@ class UltimiSuonatiInOnda extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Consumer<OnAirLatestSongProvider>(
-                builder: (context, value, child) {
+              BlocBuilder<LatestsongBloc, LatestsongState>(
+                builder: (context, value) {
                   return AnimatedSwitcher(
                     duration: Duration(milliseconds: 600),
                     child: value.currentList.isNotEmpty

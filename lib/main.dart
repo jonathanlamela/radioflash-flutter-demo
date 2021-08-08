@@ -2,26 +2,25 @@ import 'dart:io';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
+import 'package:radioflash/bloc/classifica_bloc.dart';
+import 'package:radioflash/bloc/latestsong_bloc.dart';
+import 'package:radioflash/bloc/navigation_bloc.dart';
+import 'package:radioflash/bloc/onairprogram_bloc.dart';
+import 'package:radioflash/bloc/player_bloc.dart';
+import 'package:radioflash/cubit/annoclassifica_cubit.dart';
 import 'package:radioflash/screens/FullPagePlayer/FullPagePlayer.dart';
 import 'package:radioflash/screens/Impostazioni/Impostazioni.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'RadioMeta.dart';
 import 'ThemeConfig.dart';
-import 'services/NavigationProvider.dart';
-import 'services/OnAirProgramProvider.dart';
-import 'services/PlayerProvider.dart';
 import 'package:flutter/material.dart';
 import 'screens/AppContainer.dart';
-import 'services/OnAirLatestSongProvider.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
-void _launchURL(_url) async => await canLaunch(_url)
-    ? await launch(_url, forceWebView: false)
-    : throw 'Could not launch $_url';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -66,7 +65,7 @@ void main() async {
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
-  NotificationSettings settings = await messaging.requestPermission(
+  await messaging.requestPermission(
     alert: true,
     announcement: false,
     badge: true,
@@ -136,34 +135,44 @@ void main() async {
     }
   });
 
-  initializeDateFormatting('it_IT', null).then((_) => runApp(
-        MultiProvider(
-          providers: [
-            ChangeNotifierProvider<PlayerProvider>(
-              create: (context) => PlayerProvider(),
-            ),
-            ChangeNotifierProvider<OnAirProgramProvider>(
-                create: (context) => OnAirProgramProvider()),
-            ChangeNotifierProvider<NavigationProvider>(
-                create: (context) => NavigationProvider()),
-            ChangeNotifierProvider<OnAirLatestSongProvider>(
-                create: (context) => OnAirLatestSongProvider()),
-          ],
-          child: MyApp(),
+  var annoCubit = AnnoclassificaCubit();
+
+  initializeDateFormatting('it_IT', null).then(
+    (_) => runApp(MultiBlocProvider(
+      providers: [
+        BlocProvider<NavigationBloc>(
+          create: (BuildContext context) => NavigationBloc(),
         ),
-      ));
+        BlocProvider<LatestsongBloc>(
+          create: (BuildContext context) => LatestsongBloc(),
+        ),
+        BlocProvider<OnairprogramBloc>(
+          create: (BuildContext context) => OnairprogramBloc(),
+        ),
+        BlocProvider<PlayerBloc>(
+          create: (BuildContext context) => PlayerBloc(),
+        ),
+        BlocProvider<ClassificaBloc>(
+          create: (context) => ClassificaBloc(annoCubit),
+        ),
+        BlocProvider<AnnoclassificaCubit>(create: (context) => annoCubit),
+      ],
+      child: MyApp(),
+    )),
+  );
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Provider.of<OnAirProgramProvider>(context, listen: false).startSync();
-    Provider.of<OnAirLatestSongProvider>(context, listen: false).startSync();
-    Provider.of<PlayerProvider>(context, listen: false).startSync();
+    context.read<OnairprogramBloc>().add(OnairprogramStartToFetchEvent());
+    context.read<LatestsongBloc>().add(LatestsongStartToFetchEvent());
+    context.read<PlayerBloc>().add(PlayerStartToFetchEvent());
 
-    Provider.of<OnAirLatestSongProvider>(context, listen: false).syncNow();
-    Provider.of<OnAirProgramProvider>(context, listen: false).syncNow();
+    context.read<LatestsongBloc>().add(LatestsongSyncNowEvent());
+    context.read<OnairprogramBloc>().add(OnairprogramSyncNowEvent());
+    context.read<PlayerBloc>().add(PlayerSyncNowEvent());
 
     AudioService.start(
         backgroundTaskEntrypoint: backgroundTaskEntrypoint,
