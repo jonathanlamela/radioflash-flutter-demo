@@ -27,7 +27,6 @@ class _ClassificaPageState extends State<ClassificaPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<ClassificaBloc>().startListenAnno();
     context.read<AnnoclassificaCubit>().initAnni();
     return Container(
       width: double.infinity,
