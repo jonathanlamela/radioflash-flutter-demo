@@ -34,7 +34,7 @@ class ClassificaBloc extends Bloc<ClassificaEvent, ClassificaState> {
   AnnoclassificaCubit annoCubit;
   StreamSubscription<AnnoclassificaState>? streamAnno;
   ClassificaBloc(this.annoCubit) : super(ClassificaInitial()) {
-    //startListenAnno();
+    startListenAnno();
   }
 
   startListenAnno() {
