@@ -1,14 +1,14 @@
 part of 'annoclassifica_cubit.dart';
 
 @immutable
-abstract class AnnoclassificaState {}
+abstract class AnnoClassificaState {}
 
-class AnnoclassificaInitial extends AnnoclassificaState {
+class AnnoclassificaInitial extends AnnoClassificaState {
   List<String> Anni = [];
   String? Selected;
 }
 
-class AnnoClassificaUpdateState extends AnnoclassificaState {
+class AnnoClassificaUpdateState extends AnnoClassificaState {
   List<String> Anni = [];
   String? Selected;
 

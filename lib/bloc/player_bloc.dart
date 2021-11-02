@@ -26,16 +26,20 @@ Future fetchData(dynamic currentPlaylist) async {
 }
 
 class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
-  PlayerBloc() : super(PlayerInitial()) {
-    audioPlayer.setUrl(currentPlaylist["linkFlusso"]!);
-    AudioService.connect();
-    AudioService.playbackStateStream.listen((event) {
+  AudioHandler? proxyAudioHandler;
+  void connectToAudioService() async {
+    proxyAudioHandler = await IsolatedAudioHandler.lookup(
+      portName: 'my_audio_handler',
+    );
+
+    proxyAudioHandler!.playbackState.listen((event) {
       if (event.playing != isPlaying) {
         isPlaying = event.playing;
         add(PlayerPlayingChangeEvent(isPlaying: isPlaying));
       }
     });
-    AudioService.customEventStream.listen((event) {
+
+    proxyAudioHandler!.customEvent.listen((event) {
       if (event == 'syncNow') {
         add(PlayerSyncNowEvent());
       }
@@ -44,6 +48,12 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
         add(PlayerSyncNowEvent());
       }
     });
+  }
+
+  PlayerBloc() : super(PlayerInitial()) {
+    audioPlayer.setUrl(currentPlaylist["linkFlusso"]!);
+
+    connectToAudioService();
   }
 
   var isPlaying = false;
@@ -62,7 +72,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   ) async* {
     //START TO SYNC
     if (event is PlayerStartToFetchEvent) {
-      Timer.periodic(Duration(seconds: 5), (timer) async {
+      Timer.periodic(Duration(seconds: 20), (timer) async {
         add(PlayerSyncNowEvent());
       });
     }
@@ -70,9 +80,9 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     if (event is PlayerPlayingChangeEvent) {
       this.isPlaying = event.isPlaying;
       if (isPlaying) {
-        AudioService.play();
+        proxyAudioHandler!.play();
       } else {
-        AudioService.pause();
+        proxyAudioHandler!.pause();
       }
       yield PlayerPlayingChangeState(
           isPlaying: isPlaying,
@@ -88,7 +98,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
       if (currentList.isNotEmpty) {
         if (responseMap[0].title != currentList[0].title) {
           currentList = responseMap;
-          AudioService.customAction('notifyData', {
+          proxyAudioHandler!.customAction('notifyData', {
             "titolo": currentList.first.title,
             "artist": currentList.first.artist,
             "coverLink": currentList.first.artworkSmallUrl
@@ -97,7 +107,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
         }
       } else {
         currentList = responseMap;
-        AudioService.customAction('notifyData', {
+        proxyAudioHandler!.customAction('notifyData', {
           "titolo": currentList.first.title,
           "artist": currentList.first.artist,
           "coverLink": currentList.first.artworkSmallUrl
@@ -123,8 +133,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
           currentList: currentList,
           currentPlaylistIndex: currentPlaylistIndex);
 
-      await AudioService.customAction(
-          'changeUrl', currentPlaylist["linkFlusso"]);
+      await proxyAudioHandler!
+          .customAction('changeUrl', {"url": currentPlaylist["linkFlusso"]});
 
       add(PlayerSyncNowEvent());
     }

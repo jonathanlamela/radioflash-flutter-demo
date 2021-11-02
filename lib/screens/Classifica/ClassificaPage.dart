@@ -27,7 +27,7 @@ class _ClassificaPageState extends State<ClassificaPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AnnoclassificaCubit>().initAnni();
+    context.read<AnnoClassificaCubit>().initAnni();
     return Container(
       width: double.infinity,
       height: MediaQuery.of(context).size.height,
@@ -122,7 +122,7 @@ class AnnoControls extends StatelessWidget {
               ),
             ),
           ),
-          BlocBuilder<AnnoclassificaCubit, AnnoclassificaState>(
+          BlocBuilder<AnnoClassificaCubit, AnnoClassificaState>(
             builder: (context, state) {
               if (state is AnnoClassificaUpdateState) {
                 return Expanded(
@@ -132,7 +132,7 @@ class AnnoControls extends StatelessWidget {
                         dropdownColor: Colors.black,
                         style: TextStyle(color: Colors.white),
                         onChanged: (value) {
-                          context.read<AnnoclassificaCubit>().cambiaAnno(value);
+                          context.read<AnnoClassificaCubit>().cambiaAnno(value);
                         },
                         value: state.Selected,
                         items: List.generate(state.Anni.length, (index) {
