@@ -19,9 +19,9 @@ Future<List<String>> anniClassifica() async {
   return lista.map<String>((e) => e["Anno"] as String).toList();
 }
 
-class AnnoclassificaCubit extends Cubit<AnnoclassificaState> {
+class AnnoClassificaCubit extends Cubit<AnnoClassificaState> {
   List<String> Anni = [];
-  AnnoclassificaCubit() : super(AnnoclassificaInitial());
+  AnnoClassificaCubit() : super(AnnoclassificaInitial());
 
   initAnni() async {
     this.Anni = await anniClassifica();

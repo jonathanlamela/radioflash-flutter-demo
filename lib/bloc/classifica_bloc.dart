@@ -31,8 +31,8 @@ List<Classifica> parseCharts(response) {
 }
 
 class ClassificaBloc extends Bloc<ClassificaEvent, ClassificaState> {
-  AnnoclassificaCubit annoCubit;
-  StreamSubscription<AnnoclassificaState>? streamAnno;
+  AnnoClassificaCubit annoCubit;
+  StreamSubscription<AnnoClassificaState>? streamAnno;
   ClassificaBloc(this.annoCubit) : super(ClassificaInitial()) {
     startListenAnno();
   }

@@ -135,7 +135,12 @@ void main() async {
     }
   });
 
-  var annoCubit = AnnoclassificaCubit();
+  AudioService.init(
+      builder: () => IsolatedAudioHandler(BackgroundMusicTask(),
+          portName: 'my_audio_handler'),
+      config: AudioServiceConfig(androidStopForegroundOnPause: true));
+
+  var annoCubit = AnnoClassificaCubit();
 
   initializeDateFormatting('it_IT', null).then(
     (_) => runApp(MultiBlocProvider(
@@ -155,7 +160,7 @@ void main() async {
         BlocProvider<ClassificaBloc>(
           create: (context) => ClassificaBloc(annoCubit),
         ),
-        BlocProvider<AnnoclassificaCubit>(create: (context) => annoCubit),
+        BlocProvider<AnnoClassificaCubit>(create: (context) => annoCubit),
       ],
       child: MyApp(),
     )),
@@ -174,10 +179,6 @@ class MyApp extends StatelessWidget {
     context.read<OnairprogramBloc>().add(OnairprogramSyncNowEvent());
     context.read<PlayerBloc>().add(PlayerSyncNowEvent());
 
-    AudioService.start(
-        backgroundTaskEntrypoint: backgroundTaskEntrypoint,
-        androidStopForegroundOnPause: true);
-
     return MaterialApp(
       title: 'RadioFlash',
       debugShowCheckedModeBanner: false,
@@ -188,9 +189,7 @@ class MyApp extends StatelessWidget {
         if (settings.name == 'home') {
           return MaterialPageRoute(
             builder: (context) {
-              return AudioServiceWidget(
-                child: AppContainer(),
-              );
+              return AppContainer();
             },
           );
         }
@@ -213,9 +212,7 @@ class MyApp extends StatelessWidget {
 
         return MaterialPageRoute(
           builder: (context) {
-            return AudioServiceWidget(
-              child: AppContainer(),
-            );
+            return AppContainer();
           },
         );
       },
@@ -224,19 +221,19 @@ class MyApp extends StatelessWidget {
   }
 }
 
-void backgroundTaskEntrypoint() {
-  AudioServiceBackground.run(() => BackgroundMusicTask());
-}
-
-class BackgroundMusicTask extends BackgroundAudioTask {
+class BackgroundMusicTask extends BaseAudioHandler {
   var audioPlayer = AudioPlayer(
     userAgent: 'radioflash/1.0 (Linux;Android 11) https://www.radioflash.fm',
   );
 
-  @override
-  Future<void> onStart(Map<String, dynamic>? params) async {
+  BackgroundMusicTask() {
+    initPlayer();
+  }
+
+  void initPlayer() async {
     audioPlayer.setUrl(playlist[0]["linkFlusso"]!);
-    await AudioServiceBackground.setMediaItem(
+
+    await updateMediaItem(
       MediaItem(
           id: '',
           album: '',
@@ -245,33 +242,33 @@ class BackgroundMusicTask extends BackgroundAudioTask {
           artUri: Uri.parse(defaultCoverUrl)),
     );
 
-    await AudioServiceBackground.setState(
+    playbackState.add(PlaybackState(
       playing: false,
       processingState: AudioProcessingState.ready,
       controls: [MediaControl.play],
-    );
+    ));
   }
 
   @override
   Future<void> onTaskRemoved() async {
-    onStop();
+    stop();
     return super.onTaskRemoved();
   }
 
   @override
-  Future<void> onStop() async {
+  Future<void> stop() async {
     audioPlayer.dispose();
-    await AudioService.stop();
-    await super.onStop();
+    await super.stop();
     exit(0);
   }
 
   @override
-  Future<dynamic> onCustomAction(String name, dynamic arguments) async {
+  Future<dynamic> customAction(String name,
+      [Map<String, dynamic>? extras]) async {
     if (name == "notifyData") {
-      var currentData = arguments;
+      var currentData = extras!;
 
-      await AudioServiceBackground.setMediaItem(
+      await updateMediaItem(
         MediaItem(
           id: '',
           album: '',
@@ -286,36 +283,40 @@ class BackgroundMusicTask extends BackgroundAudioTask {
       var lastState = audioPlayer.playerState.playing;
 
       if (lastState) {
-        AudioService.pause();
+        pause();
       }
 
-      audioPlayer.setUrl(arguments);
+      audioPlayer.setUrl(extras!["url"]);
 
       if (lastState) {
-        AudioService.play();
+        play();
       }
     }
   }
 
   @override
-  Future<void> onPlay() async {
-    AudioServiceBackground.sendCustomEvent('playClick');
-    await AudioServiceBackground.setState(
-      playing: true,
-      processingState: AudioProcessingState.ready,
-      controls: [MediaControl.pause],
+  Future<void> play() async {
+    customEvent.add('playClick');
+    playbackState.add(
+      PlaybackState(
+        playing: true,
+        processingState: AudioProcessingState.ready,
+        controls: [MediaControl.pause],
+      ),
     );
 
     audioPlayer.play();
   }
 
   @override
-  Future<void> onPause() async {
-    AudioServiceBackground.sendCustomEvent('pauseClick');
-    await AudioServiceBackground.setState(
-      playing: false,
-      processingState: AudioProcessingState.ready,
-      controls: [MediaControl.play],
+  Future<void> pause() async {
+    customEvent.add('pauseClick');
+    playbackState.add(
+      PlaybackState(
+        playing: false,
+        processingState: AudioProcessingState.ready,
+        controls: [MediaControl.play],
+      ),
     );
     audioPlayer.pause();
   }
