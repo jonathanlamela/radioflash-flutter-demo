@@ -138,7 +138,12 @@ void main() async {
   AudioService.init(
       builder: () => IsolatedAudioHandler(BackgroundMusicTask(),
           portName: 'my_audio_handler'),
-      config: AudioServiceConfig(androidStopForegroundOnPause: true));
+      config: AudioServiceConfig(
+        androidStopForegroundOnPause: true,
+        androidNotificationChannelId:
+            'com.realeventsrl.radioflash.channel.audio',
+        androidNotificationChannelName: 'Music playback',
+      ));
 
   var annoCubit = AnnoClassificaCubit();
 
@@ -233,20 +238,20 @@ class BackgroundMusicTask extends BaseAudioHandler {
   void initPlayer() async {
     audioPlayer.setUrl(playlist[0]["linkFlusso"]!);
 
-    await updateMediaItem(
-      MediaItem(
-          id: '',
-          album: '',
-          title: "Radio Flash",
-          artist: "Ascolta la Radio",
-          artUri: Uri.parse(defaultCoverUrl)),
-    );
+    mediaItem.add(MediaItem(
+        id: '',
+        album: '',
+        title: "Radio Flash",
+        artist: "Ascolta la Radio",
+        artUri: Uri.parse(defaultCoverUrl)));
 
-    playbackState.add(PlaybackState(
-      playing: false,
-      processingState: AudioProcessingState.ready,
-      controls: [MediaControl.play],
-    ));
+    playbackState.add(
+      playbackState.value.copyWith(
+        playing: false,
+        processingState: AudioProcessingState.ready,
+        controls: [MediaControl.play],
+      ),
+    );
   }
 
   @override
@@ -267,16 +272,15 @@ class BackgroundMusicTask extends BaseAudioHandler {
       [Map<String, dynamic>? extras]) async {
     if (name == "notifyData") {
       var currentData = extras!;
+      mediaItem.add(MediaItem(
+        id: '',
+        album: '',
+        title: currentData["titolo"],
+        artist: currentData["artist"],
+        artUri: Uri.parse(currentData["coverLink"]),
+      ));
 
-      await updateMediaItem(
-        MediaItem(
-          id: '',
-          album: '',
-          title: currentData["titolo"],
-          artist: currentData["artist"],
-          artUri: Uri.parse(currentData["coverLink"]),
-        ),
-      );
+      print("Ricevo data");
     }
 
     if (name == "changeUrl") {
@@ -298,7 +302,7 @@ class BackgroundMusicTask extends BaseAudioHandler {
   Future<void> play() async {
     customEvent.add('playClick');
     playbackState.add(
-      PlaybackState(
+      playbackState.value.copyWith(
         playing: true,
         processingState: AudioProcessingState.ready,
         controls: [MediaControl.pause],
@@ -312,7 +316,7 @@ class BackgroundMusicTask extends BaseAudioHandler {
   Future<void> pause() async {
     customEvent.add('pauseClick');
     playbackState.add(
-      PlaybackState(
+      playbackState.value.copyWith(
         playing: false,
         processingState: AudioProcessingState.ready,
         controls: [MediaControl.play],

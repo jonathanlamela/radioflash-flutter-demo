@@ -98,20 +98,25 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
       if (currentList.isNotEmpty) {
         if (responseMap[0].title != currentList[0].title) {
           currentList = responseMap;
+          if (proxyAudioHandler != null) {
+            proxyAudioHandler!.customAction('notifyData', {
+              "titolo": currentList.first.title,
+              "artist": currentList.first.artist,
+              "coverLink": currentList.first.artworkSmallUrl
+            });
+          }
+          add(PlayerDataChangeEvent(currentList));
+        }
+      } else {
+        currentList = responseMap;
+        if (proxyAudioHandler != null) {
           proxyAudioHandler!.customAction('notifyData', {
             "titolo": currentList.first.title,
             "artist": currentList.first.artist,
             "coverLink": currentList.first.artworkSmallUrl
           });
-          add(PlayerDataChangeEvent(currentList));
         }
-      } else {
-        currentList = responseMap;
-        proxyAudioHandler!.customAction('notifyData', {
-          "titolo": currentList.first.title,
-          "artist": currentList.first.artist,
-          "coverLink": currentList.first.artworkSmallUrl
-        });
+
         add(PlayerDataChangeEvent(currentList));
       }
     }
