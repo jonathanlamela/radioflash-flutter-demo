@@ -1,22 +1,20 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
-import 'RPBSongInfo.dart';
-import 'RPBPlayLine.dart';
-import 'RPBPlayButton.dart';
+import 'radio_bottom_player_songinfo.dart';
+import 'radio_bottom_player_playline.dart';
+import 'radio_bottom_player_playbutton.dart';
 import '../../ThemeConfig.dart';
 
-class RPBWidget extends StatefulWidget {
-  RPBWidget({Key? key}) : super(key: key);
+class RadioBottomPlayerWidget extends StatefulWidget {
+  RadioBottomPlayerWidget({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return RPBWidgetState();
+    return RadioBottomPlayerWidgetState();
   }
 }
 
-class RPBWidgetState extends State<RPBWidget> {
+class RadioBottomPlayerWidgetState extends State<RadioBottomPlayerWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,14 +43,14 @@ class RPBWidgetState extends State<RPBWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Flexible(flex: 4, child: RPBSongInfo()),
-                  Flexible(flex: 2, child: RPBPlayButton()),
+                  Flexible(flex: 4, child: RadioBottomPlayerSongInfo()),
+                  Flexible(flex: 2, child: RadioBottomPlayerPlayButton()),
                 ],
               ),
             ),
           ),
         ),
-        RPBPlayLine(),
+        RadioBottomPlayerPlayLine(),
       ],
     );
   }

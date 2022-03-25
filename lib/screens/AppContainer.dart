@@ -1,14 +1,13 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:radioflash/ThemeConfig.dart';
 import 'package:radioflash/bloc/navigation_bloc.dart';
 import 'package:radioflash/screens/NoInternet.dart';
 import 'package:radioflash/screens/Notizie/Notizie.dart';
-import 'package:radioflash/widgets/RadioPlayerBottom/RPBWidget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:radioflash/widgets/radio_bottom_player/radio_bottom_player_widget.dart';
 
 import 'Home/Home.dart';
 import 'Classifica/ClassificaPage.dart';
@@ -94,7 +93,7 @@ class AppContainerState extends State<AppContainer> {
                             ],
                           ),
                         ),
-                        RPBWidget()
+                        RadioBottomPlayerWidget()
                       ],
                     ),
                   ],
@@ -115,7 +114,7 @@ class AppContainerState extends State<AppContainer> {
             ),
             appBar: PreferredSize(
               child: AppBar(
-                  brightness: Brightness.dark,
+                  systemOverlayStyle: SystemUiOverlayStyle.dark,
                   elevation: 0,
                   backgroundColor: context.statusBarColor()),
               preferredSize: Size.fromHeight(0),

@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ImpostazioniScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class ImpostazioniScreenState extends State<ImpostazioniScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
