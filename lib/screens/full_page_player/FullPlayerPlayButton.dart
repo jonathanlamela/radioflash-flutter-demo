@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:radioflash/bloc/player_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:radioflash/provider.dart';
 import '../../ThemeConfig.dart';
 
-class FullPlayerPlayButton extends StatefulWidget {
+class FullPlayerPlayButton extends ConsumerWidget {
   @override
-  State<StatefulWidget> createState() {
-    return FullPlayerPlayButtonState();
-  }
-}
-
-class FullPlayerPlayButtonState extends State<FullPlayerPlayButton> {
-  var isPlaying = false;
-  @override
-  Widget build(BuildContext context) {
-    isPlaying = context.watch<PlayerBloc>().isPlaying;
+  Widget build(BuildContext context, WidgetRef ref) {
+    var isPlaying =
+        ref.watch(playerStatusProvider.select((value) => value.isPlaying));
     var content = Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -36,15 +30,9 @@ class FullPlayerPlayButtonState extends State<FullPlayerPlayButton> {
                       )),
                 color: context.playPauseButtonIconColor(),
                 onPressed: () {
-                  if (isPlaying) {
-                    context
-                        .read<PlayerBloc>()
-                        .add(PlayerPlayingChangeEvent(isPlaying: false));
-                  } else {
-                    context
-                        .read<PlayerBloc>()
-                        .add(PlayerPlayingChangeEvent(isPlaying: true));
-                  }
+                  ref
+                      .read(playerStatusProvider.notifier)
+                      .setIsPlaying(!isPlaying);
                 }),
           )
         ],

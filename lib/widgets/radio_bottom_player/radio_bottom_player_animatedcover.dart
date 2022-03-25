@@ -1,17 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RPBAnimatedCover extends StatefulWidget {
+class RadioBottomPlayerAnimatedCover extends StatefulWidget {
   final Image? image;
   final bool? isPlaying;
-  RPBAnimatedCover({this.image, this.isPlaying = false});
+  RadioBottomPlayerAnimatedCover({this.image, this.isPlaying = false});
   @override
   State<StatefulWidget> createState() {
-    return RPBAnimatedCoverState();
+    return RadioBottomPlayerAnimatedCoverState();
   }
 }
 
-class RPBAnimatedCoverState extends State<RPBAnimatedCover>
+class RadioBottomPlayerAnimatedCoverState
+    extends State<RadioBottomPlayerAnimatedCover>
     with SingleTickerProviderStateMixin {
   double boxWidth = 40;
   double boxHeight = 40;

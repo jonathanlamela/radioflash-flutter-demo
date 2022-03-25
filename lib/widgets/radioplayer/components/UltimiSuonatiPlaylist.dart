@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:radioflash/bloc/player_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:radioflash/provider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 import 'package:radioflash/widgets/UltimiSuonatiList.dart';
 import '../../../ThemeConfig.dart';
 
-class UltimiSuonatiPlaylist extends StatelessWidget {
+class UltimiSuonatiPlaylist extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var currentList =
+        ref.watch(playerStatusProvider.select((value) => value.currentList));
     return Column(
       children: [
         Container(
@@ -33,21 +34,17 @@ class UltimiSuonatiPlaylist extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BlocBuilder<PlayerBloc, PlayerState>(
-                builder: (context, value) {
-                  return AnimatedSwitcher(
-                    duration: Duration(milliseconds: 600),
-                    child: value.currentList.isNotEmpty
-                        ? UltimiSuonatiList(
-                            items: value.currentList
-                                .where((element) => element.isSong == true)
-                                .toList()
-                                .skip(1)
-                                .take(6))
-                        : LoadingProgress(),
-                  );
-                },
-              ),
+              AnimatedSwitcher(
+                duration: Duration(milliseconds: 600),
+                child: currentList.isNotEmpty
+                    ? UltimiSuonatiList(
+                        items: currentList
+                            .where((element) => element.isSong == true)
+                            .toList()
+                            .skip(1)
+                            .take(6))
+                    : LoadingProgress(),
+              )
             ],
           ),
         ),

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -159,9 +158,9 @@ class NewReleasesList extends StatelessWidget {
                         },
                       );
                     },
-                    child: Container(
+                    /*child: Container(
                       child: items.elementAt(index).cover,
-                    ),
+                    ),*/
                   );
                 },
                 childCount: 12,

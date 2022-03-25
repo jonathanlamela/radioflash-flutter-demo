@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:radioflash/bloc/player_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:radioflash/provider.dart';
 
 import '../../../RadioMeta.dart';
 import '../../../ThemeConfig.dart';
 
-class WebRadioChooseWidget extends StatelessWidget {
+class WebRadioChooseWidget extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var currentPlayListIndex = ref.watch(
+        playerStatusProvider.select((value) => value.currentPlaylistIndex));
     var controller = PageController(
-        viewportFraction: 0.5,
-        initialPage: context.watch<PlayerBloc>().currentPlaylistIndex);
+        viewportFraction: 0.5, initialPage: currentPlayListIndex);
 
     return Column(
       children: [
@@ -39,9 +41,9 @@ class WebRadioChooseWidget extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                         physics: BouncingScrollPhysics(),
                         onPageChanged: (value) {
-                          context
-                              .read<PlayerBloc>()
-                              .add(PlayerChangePlaylistEvent(value));
+                          ref
+                              .read(playerStatusProvider.notifier)
+                              .changePlaylist(value);
                         },
                         children: List.generate(
                           playlist.length,

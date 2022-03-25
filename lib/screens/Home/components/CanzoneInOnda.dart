@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radioflash/ThemeConfig.dart';
-import 'package:radioflash/bloc/player_bloc.dart';
 import 'package:radioflash/models/TrackItem.dart';
+import 'package:radioflash/provider.dart';
 import 'package:radioflash/widgets/LoadingProgress.dart';
 
-class CanzoneInOnda extends StatefulWidget {
+class CanzoneInOnda extends ConsumerWidget {
   @override
-  State<StatefulWidget> createState() {
-    return CanzoneInOndaState();
-  }
-}
-
-class CanzoneInOndaState extends State<CanzoneInOnda> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var currentList =
+        ref.watch(playerStatusProvider.select((value) => value.currentList));
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,16 +37,11 @@ class CanzoneInOndaState extends State<CanzoneInOnda> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
-                child: BlocBuilder<PlayerBloc, PlayerState>(
-                  builder: (context, value) {
-                    return AnimatedSwitcher(
-                      child: value.currentList.isNotEmpty
-                          ? SongInfo(item: value.currentList.first)
-                          : LoadingProgress(),
-                      duration: Duration(milliseconds: 800),
-                    );
-                  },
-                ),
+                child: AnimatedSwitcher(
+                    child: currentList.isNotEmpty
+                        ? SongInfo(item: currentList.first)
+                        : LoadingProgress(),
+                    duration: Duration(milliseconds: 800)),
               )
             ],
           ),
