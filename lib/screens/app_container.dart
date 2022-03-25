@@ -1,34 +1,28 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radioflash/ThemeConfig.dart';
-import 'package:radioflash/bloc/navigation_bloc.dart';
-import 'package:radioflash/screens/NoInternet.dart';
-import 'package:radioflash/screens/Notizie/Notizie.dart';
+import 'package:radioflash/provider.dart';
+import 'package:radioflash/screens/no_internet.dart';
+import 'package:radioflash/screens/notizie.dart';
+import 'package:radioflash/screens/home.dart';
 
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:radioflash/screens/classifica/classifica_page.dart';
-import 'package:radioflash/widgets/radio_bottom_player/radio_bottom_player_widget.dart';
+import 'package:radioflash/screens/classifica.dart';
+import 'package:radioflash/widgets/radio_bottom_player_widget.dart';
 
-import 'Home/Home.dart';
-import '../widgets/RadioTopBar.dart';
+import '../widgets/radio_top_bar.dart';
 
-class AppContainer extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return AppContainerState();
-  }
-}
-
-class AppContainerState extends State<AppContainer> {
-  var pageController = PageController(
+class AppContainer extends ConsumerWidget {
+  final pageController = PageController(
     initialPage: 0,
     keepPage: true,
   );
-  var selectedIndex = 0;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedIndex = ref.watch(navigationProvider);
+
     var navItems = [
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
@@ -76,9 +70,9 @@ class AppContainerState extends State<AppContainer> {
                             scrollDirection: Axis.horizontal,
                             controller: pageController,
                             onPageChanged: (value) {
-                              context.read<NavigationBloc>().add(
-                                  NavigationPageChangedEvent(
-                                      currentPage: value));
+                              ref
+                                  .read(navigationProvider.notifier)
+                                  .selectedItem(value);
                             },
                             children: [
                               Home(
@@ -119,30 +113,26 @@ class AppContainerState extends State<AppContainer> {
                   backgroundColor: context.statusBarColor()),
               preferredSize: Size.fromHeight(0),
             ),
-            bottomNavigationBar: BlocBuilder<NavigationBloc, NavigationState>(
-              builder: (context, state) {
-                return BottomNavigationBar(
-                  onTap: (value) {
-                    pageController.animateToPage(
-                      value,
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.ease,
-                    );
-                  },
-                  currentIndex: state.currentPage,
-                  type: BottomNavigationBarType.fixed,
-                  selectedItemColor: context.bottomNavSelectedItemColor(),
-                  unselectedItemColor: context.bottomNavUnselectedItemColor(),
-                  unselectedLabelStyle: context.bottomNavTextStyle(),
-                  selectedLabelStyle: context.bottomNavSelectedTextStyle(),
-                  items: List.generate(navItems.length, (index) {
-                    return BottomNavigationBarItem(
-                      icon: navItems[index].icon,
-                      label: navItems[index].label,
-                    );
-                  }),
+            bottomNavigationBar: BottomNavigationBar(
+              onTap: (value) {
+                pageController.animateToPage(
+                  value,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.ease,
                 );
               },
+              currentIndex: selectedIndex,
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: context.bottomNavSelectedItemColor(),
+              unselectedItemColor: context.bottomNavUnselectedItemColor(),
+              unselectedLabelStyle: context.bottomNavTextStyle(),
+              selectedLabelStyle: context.bottomNavSelectedTextStyle(),
+              items: List.generate(navItems.length, (index) {
+                return BottomNavigationBarItem(
+                  icon: navItems[index].icon,
+                  label: navItems[index].label,
+                );
+              }),
             )),
       ),
     );

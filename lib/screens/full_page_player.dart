@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radioflash/provider.dart';
-import 'package:radioflash/widgets/LoadingProgress.dart';
+import 'package:radioflash/widgets/loading_progress.dart';
 
-import '../../ThemeConfig.dart';
-import 'FullPageAnimatedCover.dart';
-import 'FullPlayerPlayButton.dart';
+import '../ThemeConfig.dart';
+import 'full_page_player/FullPageAnimatedCover.dart';
+import 'full_page_player/FullPlayerPlayButton.dart';
 
 class FullPagePlayer extends ConsumerWidget {
   @override

@@ -4,17 +4,17 @@ import 'package:intl/intl.dart';
 import 'package:radioflash/ThemeConfig.dart';
 import 'package:radioflash/bloc/onairprogram_bloc.dart';
 import 'package:radioflash/models/ProgramItem.dart';
-import 'package:radioflash/widgets/LoadingProgress.dart';
+import 'package:radioflash/widgets/loading_progress.dart';
 import 'package:radioflash/widgets/RadioSize.dart';
 
-class OnAirNowProgramWidget extends StatefulWidget {
+class HomeProgrammaInOndaWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return OnAirNowProgramWidgetState();
+    return HomeProgrammaInOndaWidgetState();
   }
 }
 
-class OnAirNowProgramWidgetState extends State<OnAirNowProgramWidget>
+class HomeProgrammaInOndaWidgetState extends State<HomeProgrammaInOndaWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
