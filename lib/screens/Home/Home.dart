@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:radioflash/screens/Home/components/HitsRadio.dart';
 
 import 'package:radioflash/screens/Home/components/OnAirNowProgramWidget.dart';
-import 'package:radioflash/screens/RadioPlayer/components/UltimiSuonatiPlaylist.dart';
-import 'package:radioflash/screens/RadioPlayer/components/WebRadioChoose.dart';
+
 import 'package:radioflash/widgets/RadioSize.dart';
+import 'package:radioflash/widgets/radioplayer/components/UltimiSuonatiPlaylist.dart';
+import 'package:radioflash/widgets/radioplayer/components/WebRadioChoose.dart';
 
 import '../../ThemeConfig.dart';
 import 'components/CanzoneInOnda.dart';
