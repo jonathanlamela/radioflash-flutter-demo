@@ -9,13 +9,13 @@ import 'package:radioflash/models/PlayerStatus.dart';
 import 'package:radioflash/models/TrackItem.dart';
 import 'package:http/http.dart' as http;
 
-class PlayerStatusProvider extends StateNotifier<PlayerStatus> {
+class PlayerProvider extends StateNotifier<PlayerStatus> {
   final Ref ref;
   var audioPlayer = AudioPlayer(
     userAgent: 'radioflash/1.0 (Linux;Android 11) https://www.radioflash.fm',
   );
 
-  PlayerStatusProvider(this.ref)
+  PlayerProvider(this.ref)
       : super(PlayerStatus(
             isPlaying: false,
             currentList: [],

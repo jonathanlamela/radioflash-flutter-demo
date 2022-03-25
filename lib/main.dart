@@ -7,11 +7,10 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:radioflash/bloc/classifica_bloc.dart';
 import 'package:radioflash/bloc/latestsong_bloc.dart';
 import 'package:radioflash/bloc/navigation_bloc.dart';
 import 'package:radioflash/bloc/onairprogram_bloc.dart';
-import 'package:radioflash/cubit/annoclassifica_cubit.dart';
+import 'package:radioflash/provider.dart';
 import 'package:radioflash/screens/Impostazioni/Impostazioni.dart';
 import 'package:radioflash/screens/full_page_player/FullPagePlayer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -146,8 +145,6 @@ void main() async {
         androidNotificationChannelName: 'Music playback',
       ));
 
-  var annoCubit = AnnoClassificaCubit();
-
   initializeDateFormatting('it_IT', null).then(
     (_) => runApp(MultiBlocProvider(
       providers: [
@@ -160,10 +157,6 @@ void main() async {
         BlocProvider<OnairprogramBloc>(
           create: (BuildContext context) => OnairprogramBloc(),
         ),
-        BlocProvider<ClassificaBloc>(
-          create: (context) => ClassificaBloc(annoCubit),
-        ),
-        BlocProvider<AnnoClassificaCubit>(create: (context) => annoCubit),
       ],
       child: ProviderScope(child: MyApp()),
     )),
@@ -179,6 +172,9 @@ class MyApp extends ConsumerWidget {
 
     context.read<LatestsongBloc>().add(LatestsongSyncNowEvent());
     context.read<OnairprogramBloc>().add(OnairprogramSyncNowEvent());
+
+    //download anni e prima classifica disponibile
+    ref.read(classificaProvider.notifier).downloadAnni();
 
     return MaterialApp(
       title: 'RadioFlash',

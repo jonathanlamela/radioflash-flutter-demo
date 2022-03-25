@@ -7,10 +7,10 @@ import 'package:radioflash/screens/Notizie/Notizie.dart';
 
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:radioflash/screens/classifica/classifica_page.dart';
 import 'package:radioflash/widgets/radio_bottom_player/radio_bottom_player_widget.dart';
 
 import 'Home/Home.dart';
-import 'Classifica/ClassificaPage.dart';
 import '../widgets/RadioTopBar.dart';
 
 class AppContainer extends StatefulWidget {
