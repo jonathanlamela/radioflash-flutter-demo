@@ -8,16 +8,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:radioflash/bloc/latestsong_bloc.dart';
-import 'package:radioflash/bloc/navigation_bloc.dart';
 import 'package:radioflash/bloc/onairprogram_bloc.dart';
 import 'package:radioflash/provider.dart';
-import 'package:radioflash/screens/Impostazioni/Impostazioni.dart';
-import 'package:radioflash/screens/full_page_player/FullPagePlayer.dart';
+import 'package:radioflash/screens/impostazioni.dart';
+import 'package:radioflash/screens/full_page_player.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'RadioMeta.dart';
 import 'ThemeConfig.dart';
 import 'package:flutter/material.dart';
-import 'screens/AppContainer.dart';
+import 'screens/app_container.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -148,9 +147,6 @@ void main() async {
   initializeDateFormatting('it_IT', null).then(
     (_) => runApp(MultiBlocProvider(
       providers: [
-        BlocProvider<NavigationBloc>(
-          create: (BuildContext context) => NavigationBloc(),
-        ),
         BlocProvider<LatestsongBloc>(
           create: (BuildContext context) => LatestsongBloc(),
         ),

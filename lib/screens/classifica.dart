@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:radioflash/widgets/classifica/classifica_anno_control.dart';
-import 'package:radioflash/widgets/classifica/classifica_control.dart';
-import 'package:radioflash/widgets/classifica/classifica_render.dart';
-import "../../ThemeConfig.dart";
+import 'package:radioflash/widgets/classifica_anno_control.dart';
+import 'package:radioflash/widgets/classifica_control.dart';
+import 'package:radioflash/widgets/classifica_render.dart';
+import '../ThemeConfig.dart';
 
 class ClassificaPage extends StatefulWidget {
   ClassificaPage({Key? key}) : super(key: key);

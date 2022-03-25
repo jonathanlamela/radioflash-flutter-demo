@@ -3,8 +3,8 @@ import 'package:radioflash/models/TrackItem.dart';
 
 import "../ThemeConfig.dart";
 
-class UltimiSuonatiList extends StatelessWidget {
-  const UltimiSuonatiList({
+class HomeUltimiSuonatiList extends StatelessWidget {
+  const HomeUltimiSuonatiList({
     Key? key,
     required this.items,
   }) : super(key: key);

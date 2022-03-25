@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:radioflash/provider.dart';
 
-import '../../../RadioMeta.dart';
-import '../../../ThemeConfig.dart';
+import '../RadioMeta.dart';
+import '../ThemeConfig.dart';
 
-class WebRadioChooseWidget extends ConsumerWidget {
+class HomeWebRadioChooseWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var currentPlayListIndex = ref.watch(

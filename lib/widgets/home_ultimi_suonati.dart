@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radioflash/provider.dart';
-import 'package:radioflash/widgets/LoadingProgress.dart';
-import 'package:radioflash/widgets/UltimiSuonatiList.dart';
-import '../../../ThemeConfig.dart';
+import 'package:radioflash/widgets/loading_progress.dart';
+import 'package:radioflash/widgets/home_ultimi_suonati_list.dart';
+import '../ThemeConfig.dart';
 
-class UltimiSuonatiPlaylist extends ConsumerWidget {
+class HomeUltimiSuonati extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var currentList =
@@ -37,7 +37,7 @@ class UltimiSuonatiPlaylist extends ConsumerWidget {
               AnimatedSwitcher(
                 duration: Duration(milliseconds: 600),
                 child: currentList.isNotEmpty
-                    ? UltimiSuonatiList(
+                    ? HomeUltimiSuonatiList(
                         items: currentList
                             .where((element) => element.isSong == true)
                             .toList()

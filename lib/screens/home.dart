@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:radioflash/screens/Home/components/HitsRadio.dart';
-
-import 'package:radioflash/screens/Home/components/OnAirNowProgramWidget.dart';
 
 import 'package:radioflash/widgets/RadioSize.dart';
-import 'package:radioflash/widgets/radioplayer/components/UltimiSuonatiPlaylist.dart';
-import 'package:radioflash/widgets/radioplayer/components/WebRadioChoose.dart';
+import 'package:radioflash/widgets/home_canzone_in_onda.dart';
+import 'package:radioflash/widgets/home_hits_radio.dart';
+import 'package:radioflash/widgets/home_programma_in_onda_widget.dart';
+import 'package:radioflash/widgets/home_ultime_uscite.dart';
+import 'package:radioflash/widgets/home_ultimi_suonati.dart';
+import 'package:radioflash/widgets/home_webradio_choose.dart';
 
-import '../../ThemeConfig.dart';
-import 'components/CanzoneInOnda.dart';
-import 'components/UltimeUscite.dart';
+import '../ThemeConfig.dart';
 
 var frequenzeSicilia = ["90.6", "93.5", "97.3", "99.7", "104.9"];
 
@@ -29,7 +28,7 @@ class Home extends StatelessWidget {
                 children: [
                   Container(
                     height: getSliderHeight(context),
-                    child: OnAirNowProgramWidget(),
+                    child: HomeProgrammaInOndaWidget(),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 24, left: 10, right: 10),
@@ -37,21 +36,24 @@ class Home extends StatelessWidget {
                       children: [
                         CardHome(
                           padding: EdgeInsets.all(16),
-                          child: CanzoneInOnda(),
+                          child: HomeCanzoneInOnda(),
                         ),
-                        Container(height: 200, child: WebRadioChooseWidget()),
+                        Container(
+                          height: 200,
+                          child: HomeWebRadioChooseWidget(),
+                        ),
                         CardHome(
                           padding: EdgeInsets.all(16),
-                          child: UltimiSuonatiPlaylist(),
+                          child: HomeUltimiSuonati(),
                         ),
                         FrequenzeRadio(),
                         CardHome(
                           padding: EdgeInsets.all(16),
-                          child: UltimeUscite(),
+                          child: HomeUltimeUscite(),
                         ),
                         CardHome(
                           padding: EdgeInsets.all(16),
-                          child: HitsRadio(),
+                          child: HomeHitsRadio(),
                         )
                       ],
                     ),

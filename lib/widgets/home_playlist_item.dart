@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/TrackItem.dart';
 import '../ThemeConfig.dart';
 
-class PlaylistItem extends StatelessWidget {
+class HomePlaylistItem extends StatelessWidget {
   final TrackItem item;
-  PlaylistItem({required this.item});
+  HomePlaylistItem({required this.item});
   @override
   Widget build(BuildContext context) {
     return Container(

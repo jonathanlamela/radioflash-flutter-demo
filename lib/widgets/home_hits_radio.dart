@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:radioflash/RadioMeta.dart';
 import 'package:radioflash/ThemeConfig.dart';
 import 'package:radioflash/models/TrackItem.dart';
-import 'package:radioflash/widgets/LoadingProgress.dart';
+import 'package:radioflash/widgets/home_playlist_item.dart';
+import 'package:radioflash/widgets/loading_progress.dart';
 
-import '../../../widgets/PlaylistListItem.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<TrackItem>> fetchData(dynamic link) async {
@@ -23,7 +23,7 @@ List<TrackItem> parseResult(response) {
       .toList();
 }
 
-class HitsRadio extends StatelessWidget {
+class HomeHitsRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -92,7 +92,7 @@ class HitsList extends StatelessWidget {
               ),
               delegate:
                   SliverChildBuilderDelegate((BuildContext context, int index) {
-                return PlaylistItem(item: items.elementAt(index));
+                return HomePlaylistItem(item: items.elementAt(index));
               }, childCount: items.length),
             ),
           ],

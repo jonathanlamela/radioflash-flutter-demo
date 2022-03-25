@@ -4,9 +4,9 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
 import 'package:radioflash/RadioMeta.dart';
 import 'package:radioflash/models/NewsItem.dart';
-import 'package:radioflash/widgets/LoadingProgress.dart';
+import 'package:radioflash/widgets/loading_progress.dart';
 
-import "../../ThemeConfig.dart";
+import '../ThemeConfig.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';

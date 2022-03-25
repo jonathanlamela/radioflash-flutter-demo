@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radioflash/ThemeConfig.dart';
 import 'package:radioflash/models/TrackItem.dart';
 import 'package:radioflash/provider.dart';
-import 'package:radioflash/widgets/LoadingProgress.dart';
+import 'package:radioflash/widgets/loading_progress.dart';
 
-class CanzoneInOnda extends ConsumerWidget {
+class HomeCanzoneInOnda extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var currentList =

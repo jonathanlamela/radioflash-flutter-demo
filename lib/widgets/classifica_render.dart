@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radioflash/ThemeConfig.dart';
 import 'package:radioflash/provider.dart';
-import 'package:radioflash/widgets/LoadingProgress.dart';
+import 'package:radioflash/widgets/loading_progress.dart';
 
 class ClassificaRender extends ConsumerWidget {
   ClassificaRender({Key? key}) : super(key: key);
