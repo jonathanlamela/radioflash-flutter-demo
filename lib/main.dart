@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:provider/provider.dart';
 import 'package:radioflash/bloc/classifica_bloc.dart';
 import 'package:radioflash/bloc/latestsong_bloc.dart';
 import 'package:radioflash/bloc/navigation_bloc.dart';
@@ -279,8 +278,6 @@ class BackgroundMusicTask extends BaseAudioHandler {
         artist: currentData["artist"],
         artUri: Uri.parse(currentData["coverLink"]),
       ));
-
-      print("Ricevo data");
     }
 
     if (name == "changeUrl") {
