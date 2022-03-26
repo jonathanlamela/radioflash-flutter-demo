@@ -7,7 +7,6 @@ import '../../ThemeConfig.dart';
 class RadioBottomPlayerPlayButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print("Rebuild " + this.runtimeType.toString());
     var isPlaying =
         ref.watch(playerStatusProvider.select((value) => value.isPlaying));
     var content = Container(

@@ -5,8 +5,8 @@ import 'package:radioflash/provider.dart';
 import 'package:radioflash/widgets/loading_progress.dart';
 
 import '../ThemeConfig.dart';
-import 'full_page_player/FullPageAnimatedCover.dart';
-import 'full_page_player/FullPlayerPlayButton.dart';
+import '../widgets/fullplayer_animated_cover.dart';
+import '../widgets/fullplayer_play_button.dart';
 
 class FullPagePlayer extends ConsumerWidget {
   @override
@@ -32,7 +32,7 @@ class FullPagePlayer extends ConsumerWidget {
               child: Container(
                 padding: EdgeInsets.only(left: 10),
                 child: SizedBox(
-                  child: FullPageAnimatedCover(
+                  child: FullPlayerAnimatedCover(
                       isPlaying: playerStatus.isPlaying,
                       image: playerStatus.currentList.first.cover),
                 ),
