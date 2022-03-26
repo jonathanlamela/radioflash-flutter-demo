@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:radioflash/ThemeConfig.dart';
-import 'package:radioflash/models/NewSongRelease.dart';
+import 'package:radioflash/models/new_song_release.dart';
 
 class HomeUltimeUsciteDetail extends StatelessWidget {
   const HomeUltimeUsciteDetail({Key? key, required this.item})

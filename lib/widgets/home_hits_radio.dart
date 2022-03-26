@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:radioflash/RadioMeta.dart';
 import 'package:radioflash/ThemeConfig.dart';
-import 'package:radioflash/models/TrackItem.dart';
+import 'package:radioflash/models/tracking_item.dart';
 import 'package:radioflash/widgets/home_playlist_item.dart';
 import 'package:radioflash/widgets/loading_progress.dart';
 

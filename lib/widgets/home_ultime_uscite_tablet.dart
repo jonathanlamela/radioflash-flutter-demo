@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:radioflash/RadioMeta.dart';
 import 'package:radioflash/ThemeConfig.dart';
-import 'package:radioflash/models/NewSongRelease.dart';
+import 'package:radioflash/models/new_song_release.dart';
 import 'package:radioflash/widgets/loading_progress.dart';
 import 'package:radioflash/widgets/home_ultime_uscite.dart';
 import 'package:radioflash/widgets/home_ultime_uscite_list_tablet.dart';

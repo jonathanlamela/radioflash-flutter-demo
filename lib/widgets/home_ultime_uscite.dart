@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:radioflash/models/NewSongRelease.dart';
+import 'package:radioflash/models/new_song_release.dart';
 import 'package:http/http.dart' as http;
 import 'package:radioflash/widgets/home_ultime_uscite_mobile.dart';
 import 'package:radioflash/widgets/home_ultime_uscite_tablet.dart';

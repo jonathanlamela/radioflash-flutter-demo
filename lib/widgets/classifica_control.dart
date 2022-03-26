@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:radioflash/models/Classifica.dart';
+import 'package:radioflash/models/classifica.dart';
 import 'package:radioflash/provider.dart';
 
 class ClassificaControl extends ConsumerWidget {

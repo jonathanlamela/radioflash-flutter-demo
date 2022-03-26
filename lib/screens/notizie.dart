@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
 import 'package:radioflash/RadioMeta.dart';
-import 'package:radioflash/models/NewsItem.dart';
+import 'package:radioflash/models/news_item.dart';
 import 'package:radioflash/widgets/loading_progress.dart';
 
 import '../ThemeConfig.dart';

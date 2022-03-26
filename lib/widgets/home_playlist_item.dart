@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/TrackItem.dart';
+import '../models/tracking_item.dart';
 import '../ThemeConfig.dart';
 
 class HomePlaylistItem extends StatelessWidget {
