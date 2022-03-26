@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:radioflash/ThemeConfig.dart';
-import 'package:radioflash/models/NewSongRelease.dart';
+import 'package:radioflash/models/new_song_release.dart';
 
 class HomeUltimeUsciteListTablet extends StatelessWidget {
   const HomeUltimeUsciteListTablet({

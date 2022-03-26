@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:radioflash/RadioMeta.dart';
-import 'package:radioflash/models/AutoreItem.dart';
+import 'package:radioflash/models/autore_item.dart';
 import 'dart:core';
 
 class ClassificaItem {

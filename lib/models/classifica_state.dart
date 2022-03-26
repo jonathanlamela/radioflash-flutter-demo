@@ -1,4 +1,4 @@
-import 'package:radioflash/models/Classifica.dart';
+import 'package:radioflash/models/classifica.dart';
 
 class ClassificaState {
   final List<String>? anni;

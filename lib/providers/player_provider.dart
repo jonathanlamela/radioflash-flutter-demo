@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:radioflash/RadioMeta.dart';
 import 'package:radioflash/main.dart';
-import 'package:radioflash/models/PlayerStatus.dart';
-import 'package:radioflash/models/TrackItem.dart';
+import 'package:radioflash/models/player_status.dart';
+import 'package:radioflash/models/tracking_item.dart';
 import 'package:http/http.dart' as http;
 
 class PlayerProvider extends StateNotifier<PlayerStatus> {

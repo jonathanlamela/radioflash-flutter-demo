@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:radioflash/models/TrackItem.dart';
+import 'package:radioflash/models/tracking_item.dart';
 
 @immutable
 class PlayerStatus {

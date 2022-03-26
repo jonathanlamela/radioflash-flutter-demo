@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:radioflash/models/NewSongRelease.dart';
+import 'package:radioflash/models/new_song_release.dart';
 import 'package:radioflash/widgets/home_ultime_uscite_detail.dart';
 
 class HomeUltimeUsciteListMobile extends StatelessWidget {

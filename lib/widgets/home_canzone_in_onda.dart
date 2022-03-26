@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:radioflash/ThemeConfig.dart';
-import 'package:radioflash/models/TrackItem.dart';
+import 'package:radioflash/models/tracking_item.dart';
 import 'package:radioflash/provider.dart';
 import 'package:radioflash/widgets/loading_progress.dart';
 

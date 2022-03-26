@@ -1,4 +1,4 @@
-import 'package:radioflash/models/ClassificaItem.dart';
+import 'package:radioflash/models/classifica_item.dart';
 
 class Classifica {
   String? titolo;

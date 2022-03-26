@@ -1,4 +1,4 @@
-import 'package:radioflash/models/ProgramItem.dart';
+import 'package:radioflash/models/program_item.dart';
 
 class ProgrammazioneResponse {
   late ProgramItem now;
