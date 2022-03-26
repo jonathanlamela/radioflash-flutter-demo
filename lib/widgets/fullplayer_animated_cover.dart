@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class FullPageAnimatedCover extends StatefulWidget {
+class FullPlayerAnimatedCover extends StatefulWidget {
   final Image? image;
   final bool? isPlaying;
-  FullPageAnimatedCover({this.image, this.isPlaying = false});
+  FullPlayerAnimatedCover({this.image, this.isPlaying = false});
   @override
   State<StatefulWidget> createState() {
     return FullPlayerAnimatedCoverState();
   }
 }
 
-class FullPlayerAnimatedCoverState extends State<FullPageAnimatedCover>
+class FullPlayerAnimatedCoverState extends State<FullPlayerAnimatedCover>
     with SingleTickerProviderStateMixin {
   double boxWidth = 300;
   double boxHeight = 300;
