@@ -89,7 +89,7 @@ void main() async {
   flutterLocalNotificationsPlugin!.initialize(
     initializationSettings,
     onSelectNotification: (payload) async {
-      launch(linkToOpen!);
+      launchUrl(Uri.parse(linkToOpen!));
     },
   );
 
@@ -97,7 +97,7 @@ void main() async {
 
   if (initialMessage != null) {
     if (initialMessage.data.containsKey("url")) {
-      launch(initialMessage.data["url"]);
+      launchUrl(initialMessage.data["url"]);
     }
   }
 
@@ -127,7 +127,7 @@ void main() async {
   });
   FirebaseMessaging.onMessageOpenedApp.listen((message) {
     if (message.data.containsKey("url")) {
-      launch(message.data["url"]);
+      launchUrl(message.data["url"]);
     }
   });
 
