@@ -1,0 +1,12 @@
+default_platform(:ios)
+
+platform :ios do
+  lane :publish do  
+    build_app(
+      skip_build_archive: false,
+      archive_path: "../build/ios/archive/Runner.xcarchive",
+    ) 
+    upload_to_app_store 
+  end
+end
+
