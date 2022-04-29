@@ -5,11 +5,11 @@ import 'package:intl/intl.dart';
 import 'package:radioflash/RadioMeta.dart';
 import 'package:radioflash/models/news_item.dart';
 import 'package:radioflash/widgets/loading_progress.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../ThemeConfig.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:url_launcher/url_launcher.dart';
 
 Future<List<NewsItem>> downloadArticoli() async {
   var httpClient = http.Client();
@@ -24,10 +24,6 @@ Future<List<NewsItem>> downloadArticoli() async {
 List<NewsItem> parseData(responseBody) {
   return responseBody.map<NewsItem>((e) => NewsItem.fromJson(e)).toList();
 }
-
-void _launchURL(_url) async => await canLaunch(_url)
-    ? await launch(_url, forceWebView: false)
-    : throw 'Could not launch $_url';
 
 class Notizie extends StatelessWidget {
   Notizie({Key? key}) : super(key: key);
@@ -197,7 +193,7 @@ class RowMobileVersion extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           primary: context.themePrimary()),
                       onPressed: () {
-                        _launchURL(item.link!);
+                        launchUrlString(item.link!);
                       },
                       child: Text(
                         "Leggi",
@@ -297,7 +293,7 @@ class RowTabletVersion extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           primary: context.themePrimary()),
                       onPressed: () {
-                        _launchURL(item.link!);
+                        launchUrlString(item.link!);
                       },
                       child: Text(
                         "Leggi",

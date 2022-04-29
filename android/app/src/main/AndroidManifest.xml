@@ -2,14 +2,10 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.realeventsrl.radioflash"
 >
-        <uses-permission android:name="android.permission.INTERNET" />
-
-       
+    <uses-permission android:name="android.permission.INTERNET" />       
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  
    
    <application
     android:label="RadioFlash.fm"
@@ -27,6 +23,7 @@
       android:resource="@color/primario"
     />
         <activity
+        android:exported="true"
       android:name="com.ryanheise.audioservice.AudioServiceActivity"
       android:launchMode="singleTop"
       android:theme="@style/LaunchTheme"
@@ -45,11 +42,11 @@
         android:name="com.google.firebase.messaging.default_notification_channel_id"
         android:value="radioflash_news"
       />
-            <intent-filter>
+            <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
+            <intent-filter >
               <action android:name="FLUTTER_NOTIFICATION_CLICK" />
               <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -61,6 +58,7 @@
        <service
       android:name="com.ryanheise.audioservice.AudioService"
       android:stopWithTask="true"
+      android:exported="true"
     >
            <intent-filter>
                <action
