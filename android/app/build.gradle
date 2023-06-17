@@ -33,7 +33,9 @@ apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 31
+    namespace 'com.realeventsrl.radioflash'
+
+    compileSdkVersion 33
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -41,8 +43,8 @@ android {
 
     defaultConfig {
         applicationId "com.realeventsrl.radioflash"
-        minSdkVersion 30
-        targetSdkVersion 30
+        minSdkVersion 31
+        targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
@@ -56,6 +58,7 @@ android {
            storePassword keystoreProperties['storePassword']
        }
    }
+
 
     buildTypes {
         release {

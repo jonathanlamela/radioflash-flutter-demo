@@ -8,7 +8,6 @@ import 'package:radioflash/screens/home.dart';
 
 import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:radioflash/screens/classifica.dart';
 import 'package:radioflash/widgets/radio_bottom_player_widget.dart';
 
 import '../widgets/radio_top_bar.dart';
@@ -27,10 +26,6 @@ class AppContainer extends ConsumerWidget {
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
         label: "Home",
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.bar_chart),
-        label: "Classifica",
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.article),
@@ -76,9 +71,6 @@ class AppContainer extends ConsumerWidget {
                             },
                             children: [
                               Home(
-                                key: UniqueKey(),
-                              ),
-                              ClassificaPage(
                                 key: UniqueKey(),
                               ),
                               Notizie(
