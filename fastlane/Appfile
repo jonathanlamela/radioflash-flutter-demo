@@ -1,0 +1,4 @@
+json_key_file("./secret_file.json")
+package_name("com.realeventsrl.radioflash")
+app_identifier("com.realevent.radioflash")
+apple_id("jonathan.la.mela@gmail.com")
