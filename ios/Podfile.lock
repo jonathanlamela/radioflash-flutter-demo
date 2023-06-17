@@ -144,7 +144,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   audio_service: f509d65da41b9521a61f1c404dd58651f265a567
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
-  connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
+  connectivity_plus: 07c49e96d7fc92bc9920617b83238c4d178b446a
   Firebase: facd334e557a979bd03a0b58d90fd56b52b8aba0
   firebase_core: 85b6664038311940ad60584eaabc73103c61f5de
   firebase_messaging: db0dab2713aafcf69591a1dc4ee8af7d8bba2abd
