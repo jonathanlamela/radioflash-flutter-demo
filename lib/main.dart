@@ -40,7 +40,7 @@ void main() async {
   channel = const AndroidNotificationChannel(
     'radioflash_news', // id
     'Notifiche RadioFlash', // title
-    'Notifiche per le notizie RadioFlash', // description
+    description: 'Notifiche per le notizie RadioFlash', // description
     importance: Importance.high,
   );
 
@@ -74,8 +74,8 @@ void main() async {
   final AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('ic_logo_vettoriale');
 
-  final IOSInitializationSettings initializationSettingsIOS =
-      IOSInitializationSettings(
+  final DarwinInitializationSettings initializationSettingsIOS =
+      DarwinInitializationSettings(
     requestSoundPermission: true,
     requestBadgePermission: true,
     requestAlertPermission: true,
@@ -88,9 +88,8 @@ void main() async {
 
   flutterLocalNotificationsPlugin!.initialize(
     initializationSettings,
-    onSelectNotification: (payload) async {
-      launchUrl(Uri.parse(linkToOpen!));
-    },
+    onDidReceiveNotificationResponse: (details) =>
+        {launchUrl(Uri.parse(linkToOpen!))},
   );
 
   var initialMessage = await messaging.getInitialMessage();
@@ -119,7 +118,7 @@ void main() async {
             android: AndroidNotificationDetails(
               channel!.id,
               channel!.name,
-              channel!.description,
+              channelDescription: channel!.description,
               color: Colors.red[900],
             ),
           ));
@@ -150,8 +149,6 @@ class MyApp extends ConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //download anni e prima classifica disponibile
-    ref.read(classificaProvider.notifier).downloadAnni();
     ref.read(playerStatusProvider.notifier).syncNow();
     ref.read(playerStatusProvider.notifier).startToFetch();
     ref.read(onAirProvider.notifier).syncNow();

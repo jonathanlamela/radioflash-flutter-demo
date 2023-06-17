@@ -2,11 +2,13 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.realeventsrl.radioflash"
 >
-    <uses-permission android:name="android.permission.INTERNET" />       
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-  
-   
+
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+
+
    <application
     android:label="RadioFlash.fm"
     android:usesCleartextTraffic="true"
@@ -31,13 +33,13 @@
       android:hardwareAccelerated="true"
       android:windowSoftInputMode="adjustResize"
     >
-          
+
             <meta-data
         android:name="io.flutter.embedding.android.NormalTheme"
         android:resource="@style/NormalTheme"
-      />        
-           
-    
+      />
+
+
       <meta-data
         android:name="com.google.firebase.messaging.default_notification_channel_id"
         android:value="radioflash_news"
@@ -67,7 +69,9 @@
            </intent-filter>
        </service>
 
-       <receiver android:name="com.ryanheise.audioservice.MediaButtonReceiver">
+       <receiver
+
+       android:name="com.ryanheise.audioservice.MediaButtonReceiver" android:exported="true">
            <intent-filter>
                <action android:name="android.intent.action.MEDIA_BUTTON" />
            </intent-filter>

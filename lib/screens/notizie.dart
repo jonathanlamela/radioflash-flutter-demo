@@ -177,7 +177,7 @@ class RowMobileVersion extends StatelessWidget {
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             textAlign: TextAlign.justify,
-                            margin: EdgeInsets.all(0))
+                            margin: Margins.all(0))
                       },
                     ),
                     Html(
@@ -185,13 +185,13 @@ class RowMobileVersion extends StatelessWidget {
                       style: {
                         "p": Style(
                             textAlign: TextAlign.justify,
-                            margin: EdgeInsets.all(0),
+                            margin: Margins.all(0),
                             color: Colors.white)
                       },
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: context.themePrimary()),
+                          backgroundColor: context.themePrimary()),
                       onPressed: () {
                         launchUrlString(item.link!);
                       },
@@ -275,7 +275,7 @@ class RowTabletVersion extends StatelessWidget {
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             textAlign: TextAlign.justify,
-                            margin: EdgeInsets.all(0))
+                            margin: Margins.all(0))
                       },
                     ),
                     Flexible(
@@ -284,14 +284,14 @@ class RowTabletVersion extends StatelessWidget {
                         style: {
                           "p": Style(
                               textAlign: TextAlign.justify,
-                              margin: EdgeInsets.all(0),
+                              margin: Margins.all(0),
                               color: Colors.white)
                         },
                       ),
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: context.themePrimary()),
+                          backgroundColor: context.themePrimary()),
                       onPressed: () {
                         launchUrlString(item.link!);
                       },

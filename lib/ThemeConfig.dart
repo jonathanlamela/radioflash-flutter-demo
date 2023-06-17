@@ -62,43 +62,6 @@ extension ThemeContext on BuildContext {
         fontWeight: FontWeight.bold,
       );
 
-  //CLASSIFICA
-  TextStyle classificaTextStyle() => TextStyle(
-        fontSize: 16,
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      );
-
-  BoxDecoration classificaCoverDecoration() => BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5)),
-        boxShadow: [
-          BoxShadow(blurRadius: 5, color: Colors.white.withOpacity(0.5))
-        ],
-      );
-
-  TextStyle classificaSongTitleTextStyle() => TextStyle(
-        color: Colors.white,
-      );
-
-  TextStyle classificaSongAuthorsTextStyle() => TextStyle(
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-        fontSize: 16,
-      );
-
-  TextStyle classificaMoreButtonTextStyle() => TextStyle(color: Colors.white);
-
-  Color classificaMoreButtonIconColor() => Colors.white;
-
-  TextStyle classificaTitoloTextStyle() => TextStyle(
-        color: Colors.white,
-      );
-
-  TextStyle classificaNumeroTextStyle() => TextStyle(
-        fontSize: 16,
-        color: Colors.white,
-      );
-
   //HITS RADIO
   TextStyle hitsTextStyle() => TextStyle(
         fontSize: 16,
@@ -214,13 +177,6 @@ extension ThemeContext on BuildContext {
 
   BoxShadow shadownForDark() =>
       BoxShadow(blurRadius: 5, color: Colors.white.withOpacity(0.5));
-
-  //classifica page
-  TextStyle classificaPageTextStyle() => TextStyle(
-        fontSize: 16,
-        color: Colors.white,
-        fontWeight: FontWeight.bold,
-      );
 
   BoxDecoration cardHomeDecoration() => BoxDecoration(
         color: homeContainerColor(),
