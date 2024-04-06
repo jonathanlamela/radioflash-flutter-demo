@@ -42,6 +42,8 @@
 	<array>
 		<string>_dartobservatory._tcp.</string>
 	</array>
+    <key>NSPrivacyAccessedAPICategoryUserDefaults</key>
+    <string></string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>This app needs access to location when open and in the background.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
