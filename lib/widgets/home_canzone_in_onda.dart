@@ -24,7 +24,7 @@ class HomeCanzoneInOnda extends ConsumerWidget {
             children: [
               Text(
                 "Ora in onda",
-                textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                textScaler: MediaQuery.of(context).textScaler,
                 style: context.ultimiSuonatiPlaylistTextStyle(),
               )
             ],

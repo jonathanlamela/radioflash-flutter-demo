@@ -24,17 +24,6 @@ var playlist = [
         "https://api.xdevel.com/streamsolution/web/player/songs/history/48?clientId=2873bb874c81be6550372b7fb222304b93a3ff34&key=fbef37c7cb070c7c050c888cce23b04a4bb455ce"
   },
   {
-    "etichettaBreve": "ROCK",
-    "etichettaCompleta": "Rock Station",
-    "logoUrl": "rock.png",
-    "linkFlusso":
-        "https://stream2.xdevel.com/audio7s194-50/stream/icecast.audio",
-    "linkOnAirData":
-        "https://api.xdevel.com/streamsolution/web/metadata/50/?clientId=2873bb874c81be6550372b7fb222304b93a3ff34",
-    "linkUltimiSuonati":
-        "https://api.xdevel.com/streamsolution/web/player/songs/history/50?clientId=2873bb874c81be6550372b7fb222304b93a3ff34&key=fbef37c7cb070c7c050c888cce23b04a4bb455ce"
-  },
-  {
     "etichettaBreve": "MUSIC GENERATION",
     "etichettaCompleta": "Music Generation",
     "logoUrl": "music_generation.png",
@@ -90,9 +79,20 @@ var playlist = [
         "https://api.xdevel.com/streamsolution/web/player/songs/history/43?clientId=2873bb874c81be6550372b7fb222304b93a3ff34&key=fbef37c7cb070c7c050c888cce23b04a4bb455ce"
   },
   {
-    "etichettaBreve": "XMAS",
-    "etichettaCompleta": "XMas",
-    "logoUrl": "xmas.png",
+    "etichettaBreve": "ALLMUSIC",
+    "etichettaCompleta": "AllMusic",
+    "logoUrl": "LogoAllMusic.png",
+    "linkFlusso":
+        "https://stream2.xdevel.com/audio7s194-50/stream/icecast.audio",
+    "linkOnAirData":
+        "https://api.xdevel.com/streamsolution/web/metadata/50/?clientId=2873bb874c81be6550372b7fb222304b93a3ff34",
+    "linkUltimiSuonati":
+        "https://api.xdevel.com/streamsolution/web/player/songs/history/50?clientId=2873bb874c81be6550372b7fb222304b93a3ff34&key=fbef37c7cb070c7c050c888cce23b04a4bb455ce"
+  },
+  {
+    "etichettaBreve": "MED",
+    "etichettaCompleta": "RadioMed",
+    "logoUrl": "LogoMed.png",
     "linkFlusso":
         "https://stream2.xdevel.com/audio6s194-49/stream/icecast.audio",
     "linkOnAirData":

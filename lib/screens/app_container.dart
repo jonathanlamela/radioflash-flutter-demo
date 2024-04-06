@@ -86,8 +86,9 @@ class AppContainer extends ConsumerWidget {
                 );
 
                 if (snapshot.hasData) {
-                  if ((snapshot.data as ConnectivityResult) ==
-                      ConnectivityResult.none) {
+                  var resultData = snapshot.data as List<ConnectivityResult>;
+
+                  if (resultData.first == ConnectivityResult.none) {
                     container = Container(
                       child: NoInternet(),
                     );
@@ -131,6 +132,6 @@ class AppContainer extends ConsumerWidget {
   }
 }
 
-Future<ConnectivityResult> checkConnection() async {
+Future<List<ConnectivityResult>> checkConnection() async {
   return await Connectivity().checkConnectivity();
 }
