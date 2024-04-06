@@ -22,7 +22,7 @@ class HomeUltimiSuonati extends ConsumerWidget {
             children: [
               Text(
                 "Ultimi suonati",
-                textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                textScaler: MediaQuery.of(context).textScaler,
                 style: context.ultimiSuonatiPlaylistTextStyle(),
               )
             ],

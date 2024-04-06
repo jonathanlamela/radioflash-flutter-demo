@@ -65,8 +65,7 @@ class Notizie extends StatelessWidget {
                       children: [
                         Text(
                           "Ultime notizie",
-                          textScaleFactor:
-                              MediaQuery.of(context).textScaleFactor,
+                          textScaler: MediaQuery.of(context).textScaler,
                           style: context.ultimiSuonatiPlaylistTextStyle(),
                         )
                       ],

@@ -120,7 +120,7 @@ class FrequenzeRadio extends StatelessWidget {
               children: [
                 Text(
                   "Frequenze",
-                  textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                  textScaler: MediaQuery.of(context).textScaler,
                   style: context.ultimiSuonatiPlaylistTextStyle(),
                 )
               ],
